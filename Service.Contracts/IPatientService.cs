@@ -1,4 +1,5 @@
 ﻿using Shared;
+using Shared.Patients;
 
 namespace Service.Contracts;
 

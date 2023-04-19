@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared;
+namespace Shared.Doctors;
 
-public abstract record PatientForManipulationDto
+public abstract record DoctorForManipulationDto
 {
-    [Required(ErrorMessage = "La Historia Clínica es requerida")]
-    public string? ClinicHistory { get; init; }
-
     [Required(ErrorMessage = "El nombre es requerido")]
     [MaxLength(50, ErrorMessage = "El nombre no puede tener más de 50 caracteres")]
     public string? Name { get; init; }

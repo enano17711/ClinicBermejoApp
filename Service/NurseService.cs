@@ -4,6 +4,7 @@ using Entities.Exceptions;
 using Entities.Models;
 using Service.Contracts;
 using Shared;
+using Shared.Nurses;
 
 namespace Service;
 

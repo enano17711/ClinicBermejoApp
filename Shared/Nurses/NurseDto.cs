@@ -1,4 +1,4 @@
-﻿namespace Shared;
+﻿namespace Shared.Nurses;
 
 public record NurseDto
 {

@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using Entities.Models;
 using Shared;
+using Shared.Doctors;
+using Shared.Nurses;
+using Shared.Patients;
 
 namespace ClinicBermejoApp;
 
