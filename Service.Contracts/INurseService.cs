@@ -1,4 +1,5 @@
 ﻿using Shared;
+using Shared.Nurses;
 
 namespace Service.Contracts;
 

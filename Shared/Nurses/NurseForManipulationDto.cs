@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared;
+namespace Shared.Nurses;
 
-public abstract record DoctorForManipulationDto
+public abstract record NurseForManipulationDto
 {
     [Required(ErrorMessage = "El nombre es requerido")]
     [MaxLength(50, ErrorMessage = "El nombre no puede tener más de 50 caracteres")]

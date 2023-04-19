@@ -3,6 +3,7 @@ using ClinicBermejoApp.Presentation.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared;
+using Shared.Doctors;
 using Shared.RequestFeatures;
 
 namespace ClinicBermejoApp.Presentation.Controllers;

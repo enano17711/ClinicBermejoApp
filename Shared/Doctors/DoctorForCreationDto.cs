@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared;
+namespace Shared.Doctors;
 
 public record DoctorForCreationDto : DoctorForManipulationDto
 {
