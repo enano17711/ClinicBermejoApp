@@ -1,5 +1,5 @@
 ﻿namespace ClinicBermejoApp.Presentation;
 
-public class Class1
+public static class AssemblyReference
 {
 }
