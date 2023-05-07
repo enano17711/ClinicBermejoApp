@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Models.Services;
 using Shared;
 
-namespace Entities.Models;
+namespace Entities.Models.Staff;
 
 public class Doctor : BasePerson
 {
@@ -14,5 +15,6 @@ public class Doctor : BasePerson
     public Specialty Specialty { get; set; }
 
     public ICollection<Patient>? Patients { get; set; }
-}
 
+    public ICollection<ServiceDoctor>? ServiceDoctors { get; set; }
+}

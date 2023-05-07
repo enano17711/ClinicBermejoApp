@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Entities.Models.Staff;
 using Shared.RequestFeatures;
 
 namespace Contracts;

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Entities.Models;
+using Entities.Models.Staff;
 using Shared;
 using Shared.Doctors;
 using Shared.Nurses;

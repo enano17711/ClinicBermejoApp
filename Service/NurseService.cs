@@ -2,6 +2,7 @@
 using Contracts;
 using Entities.Exceptions;
 using Entities.Models;
+using Entities.Models.Staff;
 using Service.Contracts;
 using Shared;
 using Shared.Nurses;

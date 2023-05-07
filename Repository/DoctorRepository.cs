@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Entities.Models.Staff;
 using Microsoft.EntityFrameworkCore;
 using Repository.Extensions;
 using Shared.RequestFeatures;

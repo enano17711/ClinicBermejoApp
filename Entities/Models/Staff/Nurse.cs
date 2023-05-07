@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Shared;
 
-namespace Entities.Models;
+namespace Entities.Models.Staff;
 
 public class Nurse : BasePerson
 {

@@ -1,6 +1,7 @@
 ﻿using System.Linq.Dynamic.Core;
 using System.Reflection;
 using Entities.Models;
+using Entities.Models.Staff;
 
 namespace Repository.Extensions;
 
