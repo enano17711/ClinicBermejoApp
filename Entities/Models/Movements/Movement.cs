@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entities.Models.Movements;
 
@@ -12,10 +13,12 @@ public class Movement
 
     [Required(ErrorMessage = "El Monto es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
+    [Precision(18, 2)]
     public decimal Amount { get; set; }
 
     [Required(ErrorMessage = "La Cantidad es requerida")]
     [Range(0, double.MaxValue, ErrorMessage = "La Cantidad debe ser positiva")]
+    [Precision(18, 2)]
     public decimal Quantity { get; set; }
 
     [Required(ErrorMessage = "La Fecha es requerida")]

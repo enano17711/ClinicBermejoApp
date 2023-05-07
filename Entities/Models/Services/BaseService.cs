@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entities.Models.Services;
 
@@ -13,5 +14,6 @@ public class BaseService
 
     [Required(ErrorMessage = "El Precio es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Precio no puede ser negativo")]
+    [Precision(18, 2)]
     public decimal Price { get; set; }
 }

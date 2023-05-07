@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entities.Models.Staff;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entities.Models.Appointments;
 
@@ -16,6 +17,7 @@ public class Appointment
 
     [Required(ErrorMessage = "El Precio es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El precio debe ser positivo")]
+    [Precision(18, 2)]
     public decimal Price { get; set; }
 
     [ForeignKey(nameof(Doctor))] public Guid? DoctorId { get; set; }
