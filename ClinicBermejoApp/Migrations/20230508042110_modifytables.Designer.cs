@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace ClinicBermejoApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230508042110_modifytables")]
+    partial class modifytables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,6 +261,9 @@ namespace ClinicBermejoApp.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("AppointmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Ci")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -293,6 +299,8 @@ namespace ClinicBermejoApp.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
 
                     b.HasIndex("DoctorId");
 
@@ -392,6 +400,9 @@ namespace ClinicBermejoApp.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("AppointmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Ci")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -424,6 +435,8 @@ namespace ClinicBermejoApp.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Doctors");
                 });
@@ -438,6 +451,9 @@ namespace ClinicBermejoApp.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("AppointmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Ci")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -470,6 +486,8 @@ namespace ClinicBermejoApp.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Nurses");
                 });
@@ -520,15 +538,15 @@ namespace ClinicBermejoApp.Migrations
             modelBuilder.Entity("Entities.Models.Appointments.Appointment", b =>
                 {
                     b.HasOne("Entities.Models.Staff.Doctor", "Doctor")
-                        .WithMany("Appointments")
+                        .WithMany()
                         .HasForeignKey("DoctorId");
 
                     b.HasOne("Entities.Models.Staff.Nurse", "Nurse")
-                        .WithMany("Appointments")
+                        .WithMany()
                         .HasForeignKey("NurseId");
 
                     b.HasOne("Entities.Models.Patient", "Patient")
-                        .WithMany("Appointments")
+                        .WithMany()
                         .HasForeignKey("PatientId");
 
                     b.Navigation("Doctor");
@@ -600,6 +618,10 @@ namespace ClinicBermejoApp.Migrations
 
             modelBuilder.Entity("Entities.Models.Patient", b =>
                 {
+                    b.HasOne("Entities.Models.Appointments.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId");
+
                     b.HasOne("Entities.Models.Staff.Doctor", "Doctor")
                         .WithMany("Patients")
                         .HasForeignKey("DoctorId");
@@ -607,6 +629,8 @@ namespace ClinicBermejoApp.Migrations
                     b.HasOne("Entities.Models.Staff.Nurse", "Nurse")
                         .WithMany("Patients")
                         .HasForeignKey("NurseId");
+
+                    b.Navigation("Appointment");
 
                     b.Navigation("Doctor");
 
@@ -635,6 +659,24 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("Entities.Models.Staff.Doctor", b =>
+                {
+                    b.HasOne("Entities.Models.Appointments.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId");
+
+                    b.Navigation("Appointment");
+                });
+
+            modelBuilder.Entity("Entities.Models.Staff.Nurse", b =>
+                {
+                    b.HasOne("Entities.Models.Appointments.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId");
+
+                    b.Navigation("Appointment");
                 });
 
             modelBuilder.Entity("Entities.Models.Appointments.Appointment", b =>
@@ -667,11 +709,6 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("DetailMovements");
                 });
 
-            modelBuilder.Entity("Entities.Models.Patient", b =>
-                {
-                    b.Navigation("Appointments");
-                });
-
             modelBuilder.Entity("Entities.Models.Services.CategoryService", b =>
                 {
                     b.Navigation("Services");
@@ -686,8 +723,6 @@ namespace ClinicBermejoApp.Migrations
                 {
                     b.Navigation("AppointmentDoctors");
 
-                    b.Navigation("Appointments");
-
                     b.Navigation("Patients");
 
                     b.Navigation("ServiceDoctors");
@@ -695,8 +730,6 @@ namespace ClinicBermejoApp.Migrations
 
             modelBuilder.Entity("Entities.Models.Staff.Nurse", b =>
                 {
-                    b.Navigation("Appointments");
-
                     b.Navigation("Patients");
                 });
 

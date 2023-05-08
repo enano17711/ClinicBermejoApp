@@ -28,4 +28,6 @@ public class Appointment
 
     [ForeignKey(nameof(Nurse))] public Guid? NurseId { get; set; }
     public Nurse? Nurse { get; set; }
+
+    public ICollection<AppointmentDoctor>? AppointmentDoctors { get; set; }
 }

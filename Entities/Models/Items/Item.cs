@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Models.Movements;
 
 namespace Entities.Models.Items;
 
@@ -15,4 +16,6 @@ public class Item : BaseItem
 
     [ForeignKey(nameof(Unit))] public Guid? UnitId { get; set; }
     public Unit? Unit { get; set; }
+
+    public ICollection<DetailMovement>? DetailMovements { get; set; }
 }

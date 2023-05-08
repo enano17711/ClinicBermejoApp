@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Models.Appointments;
 using Entities.Models.Services;
 using Shared;
 
@@ -14,7 +15,11 @@ public class Doctor : BasePerson
 
     public Specialty Specialty { get; set; }
 
+    public ICollection<Appointment>? Appointments { get; set; }
+    
     public ICollection<Patient>? Patients { get; set; }
 
     public ICollection<ServiceDoctor>? ServiceDoctors { get; set; }
+
+    public ICollection<AppointmentDoctor>? AppointmentDoctors { get; set; }
 }

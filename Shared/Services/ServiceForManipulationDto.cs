@@ -16,4 +16,6 @@ public abstract record ServiceForManipulationDto
     [Range(0, double.MaxValue, ErrorMessage = "El Precio no puede ser negativo")]
     [Precision(18, 2)]
     public decimal Price { get; set; }
+
+    public Guid? CategoryServiceId { get; set; }
 }

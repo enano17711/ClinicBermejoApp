@@ -5,4 +5,6 @@ namespace Entities.Models.Services;
 public class CategoryService : BaseService
 {
     [Column("CategoryServiceId")] public Guid Id { get; set; }
+
+    public ICollection<Service>? Services { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Models.Appointments;
 using Entities.Models.Staff;
 
 namespace Entities.Models;
@@ -18,4 +19,6 @@ public class Patient : BasePerson
 
     [ForeignKey(nameof(Nurse))] public Guid? NurseId { get; set; }
     public Nurse? Nurse { get; set; }
+
+    public ICollection<Appointment>? Appointments { get; set; }
 }

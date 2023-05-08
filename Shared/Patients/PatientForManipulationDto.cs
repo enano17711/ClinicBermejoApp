@@ -27,4 +27,8 @@ public abstract record PatientForManipulationDto
     public DateTime? Date { get; init; }
 
     public string? Address { get; init; }
+
+    public Guid? DoctorId { get; set; }
+
+    public Guid? NurseId { get; set; }
 }
