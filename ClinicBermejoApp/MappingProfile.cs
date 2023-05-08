@@ -5,6 +5,7 @@ using Shared;
 using Shared.Doctors;
 using Shared.Nurses;
 using Shared.Patients;
+using Shared.Suppliers;
 
 namespace ClinicBermejoApp;
 
@@ -23,5 +24,9 @@ public class MappingProfile : Profile
         CreateMap<NurseDto, Nurse>().ReverseMap();
         CreateMap<NurseForCreationDto, Nurse>().ReverseMap();
         CreateMap<NurseForUpdateDto, Nurse>().ReverseMap();
+
+        CreateMap<SupplierDto, Supplier>().ReverseMap();
+        CreateMap<SupplierForCreationDto, Supplier>().ReverseMap();
+        CreateMap<SupplierForUpdateDto, Supplier>().ReverseMap();
     }
 }
