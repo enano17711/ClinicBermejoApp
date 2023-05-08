@@ -1,4 +1,7 @@
-﻿namespace Shared.Patients;
+﻿using Shared.Doctors;
+using Shared.Nurses;
+
+namespace Shared.Patients;
 
 public record PatientDto
 {
@@ -19,4 +22,8 @@ public record PatientDto
     public DateTime? Date { get; init; }
 
     public string? Address { get; init; }
+
+    public DoctorDto? Doctor { get; init; }
+
+    public NurseDto? Nurse { get; init; }
 }

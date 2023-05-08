@@ -7,6 +7,7 @@ using Shared.CategoryService;
 using Shared.Doctors;
 using Shared.Nurses;
 using Shared.Patients;
+using Shared.ServiceDoctors;
 using Shared.Services;
 using Shared.Suppliers;
 
@@ -35,9 +36,15 @@ public class MappingProfile : Profile
         CreateMap<CategoryServiceDto, CategoryService>().ReverseMap();
         CreateMap<CategoryServiceForCreationDto, CategoryService>().ReverseMap();
         CreateMap<CategoryServiceForUpdateDto, CategoryService>().ReverseMap();
+        CreateMap<CategoryServiceForViewDto, CategoryService>().ReverseMap();
 
         CreateMap<ServiceDto, Entities.Models.Services.Service>().ReverseMap();
         CreateMap<ServiceForCreationDto, Entities.Models.Services.Service>().ReverseMap();
         CreateMap<ServiceForUpdateDto, Entities.Models.Services.Service>().ReverseMap();
+        CreateMap<ServiceForViewDto, Entities.Models.Services.Service>().ReverseMap();
+
+        CreateMap<ServiceDoctorDto, ServiceDoctor>().ReverseMap();
+        CreateMap<ServiceDoctorForCreationDto, ServiceDoctor>().ReverseMap();
+        CreateMap<ServiceDoctorForUpdateDto, ServiceDoctor>().ReverseMap();
     }
 }

@@ -12,6 +12,7 @@ public class ServiceManager : IServiceManager
     private readonly Lazy<ISupplierService> _supplierService;
     private readonly Lazy<ICategoryServiceService> _categoryServiceService;
     private readonly Lazy<IServiceService> _serviceService;
+    private readonly Lazy<IServiceDoctorService> _serviceDoctorService;
 
     public ServiceManager(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
     {
@@ -22,6 +23,8 @@ public class ServiceManager : IServiceManager
         _categoryServiceService =
             new Lazy<ICategoryServiceService>(() => new CategoryServiceService(repository, mapper, logger));
         _serviceService = new Lazy<IServiceService>(() => new ServiceService(repository, mapper, logger));
+        _serviceDoctorService =
+            new Lazy<IServiceDoctorService>(() => new ServiceDoctorService(repository, mapper, logger));
     }
 
     public IDoctorService DoctorService => _doctorService.Value;
@@ -30,4 +33,5 @@ public class ServiceManager : IServiceManager
     public ISupplierService SupplierService => _supplierService.Value;
     public ICategoryServiceService CategoryServiceService => _categoryServiceService.Value;
     public IServiceService ServiceService => _serviceService.Value;
+    public IServiceDoctorService ServiceDoctorService => _serviceDoctorService.Value;
 }

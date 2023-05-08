@@ -8,4 +8,5 @@ public interface IServiceManager
     ISupplierService SupplierService { get; }
     ICategoryServiceService CategoryServiceService { get; }
     IServiceService ServiceService { get; }
+    IServiceDoctorService ServiceDoctorService { get; }
 }

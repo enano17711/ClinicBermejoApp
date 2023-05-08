@@ -8,6 +8,6 @@ public interface IDoctorRepository
 {
     Task<PagedList<Doctor>> GetDoctorsAsync(DoctorParameters parameters, bool trackChanges);
     void CreateDoctor(Doctor doctor);
-    Task<Doctor> GetDoctorByIdAsync(Guid id, bool trackChanges);
+    Task<Doctor?> GetDoctorByIdAsync(Guid id, bool trackChanges);
     void DeleteDoctor(Doctor doctor);
 }

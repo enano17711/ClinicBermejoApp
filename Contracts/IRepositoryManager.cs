@@ -8,5 +8,6 @@ public interface IRepositoryManager
     IPatientRepository Patients { get; }
     ICategoryServiceRepository CategoryServices { get; }
     IServiceRepository Services { get; }
+    IServiceDoctorRepository ServiceDoctors { get; }
     Task SaveAsync();
 }

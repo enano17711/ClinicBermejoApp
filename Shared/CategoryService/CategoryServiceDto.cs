@@ -1,4 +1,6 @@
-﻿namespace Shared.CategoryService;
+﻿using Shared.Services;
+
+namespace Shared.CategoryService;
 
 public record CategoryServiceDto
 {
@@ -6,4 +8,5 @@ public record CategoryServiceDto
     public string? Name { get; set; }
     public string? Description { get; set; }
     public decimal Price { get; set; }
+    public IEnumerable<ServiceForViewDto>? Services { get; set; }
 }

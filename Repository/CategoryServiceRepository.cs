@@ -19,6 +19,7 @@ public class CategoryServiceRepository : RepositoryBase<CategoryService>,
         var categoryServices = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
+            .Include(cs => cs.Services)
             .ToListAsync();
 
         return PagedList<CategoryService>.ToPagedList(categoryServices,
@@ -30,6 +31,7 @@ public class CategoryServiceRepository : RepositoryBase<CategoryService>,
         bool trackChanges) =>
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
+            .Include(cs => cs.Services)
             .SingleOrDefaultAsync();
 
     public void CreateCategoryService(CategoryService categoryService) =>

@@ -28,7 +28,7 @@ public class DoctorRepository : RepositoryBase<Doctor>,
             parameters.PageSize);
     }
 
-    public async Task<Doctor> GetDoctorByIdAsync(Guid id,
+    public async Task<Doctor?> GetDoctorByIdAsync(Guid id,
         bool trackChanges) =>
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)

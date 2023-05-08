@@ -19,6 +19,8 @@ public class ServiceRepository : RepositoryBase<Service>,
         var services = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
+            .Include(s => s.CategoryService)
+            .Include(s => s.ServiceDoctors)
             .ToListAsync();
 
         return PagedList<Service>.ToPagedList(services,
@@ -30,6 +32,8 @@ public class ServiceRepository : RepositoryBase<Service>,
         bool trackChanges) =>
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
+            .Include(s => s.CategoryService)
+            .Include(s => s.ServiceDoctors)
             .SingleOrDefaultAsync();
 
     public void CreateService(Service service) =>
