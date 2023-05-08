@@ -6,6 +6,7 @@ using Entities.Models.Staff;
 using Service.Contracts;
 using Shared;
 using Shared.Nurses;
+using Shared.RequestFeatures;
 
 namespace Service;
 
@@ -22,10 +23,14 @@ public class NurseService : INurseService
         _logger = logger;
     }
 
-    public async Task<IEnumerable<NurseDto>> GetNursesAsync(bool trackChanges)
+    public async Task<(IEnumerable<NurseDto> nurses, MetaData metaData)> GetNursesAsync(
+        NurseParameters parameters,
+        bool trackChanges)
     {
-        var nurses = await _repository.Nurses.GetNursesAsync(trackChanges);
-        return _mapper.Map<IEnumerable<NurseDto>>(nurses);
+        var nursesWithMetaData = await _repository.Nurses.GetNursesAsync(parameters, trackChanges);
+        var nursesDto = _mapper.Map<IEnumerable<NurseDto>>(nursesWithMetaData);
+
+        return (nursesDto, nursesWithMetaData.MetaData);
     }
 
     public async Task<NurseDto> GetNurseByIdAsync(Guid id, bool trackChanges)
