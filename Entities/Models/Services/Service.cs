@@ -4,7 +4,7 @@ namespace Entities.Models.Services;
 
 public class Service : BaseService
 {
-    [Column("ServiceId")] public Guid ServiceId { get; set; }
+    [Column("ServiceId")] public Guid Id { get; set; }
 
     public ICollection<ServiceDoctor>? ServiceDoctors { get; set; }
 }

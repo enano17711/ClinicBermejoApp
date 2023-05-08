@@ -7,5 +7,6 @@ public interface IRepositoryManager
     INurseRepository Nurses { get; }
     IPatientRepository Patients { get; }
     ICategoryServiceRepository CategoryServices { get; }
+    IServiceRepository Services { get; }
     Task SaveAsync();
 }

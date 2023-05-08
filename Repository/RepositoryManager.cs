@@ -10,6 +10,7 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<IPatientRepository> _patientRepository;
     private readonly Lazy<ISupplierRepository> _supplierRepository;
     private readonly Lazy<ICategoryServiceRepository> _categoryServiceRepository;
+    private readonly Lazy<IServiceRepository> _serviceRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -20,6 +21,7 @@ public class RepositoryManager : IRepositoryManager
         _supplierRepository = new Lazy<ISupplierRepository>(() => new SupplierRepository(_repositoryContext));
         _categoryServiceRepository =
             new Lazy<ICategoryServiceRepository>(() => new CategoryServiceRepository(_repositoryContext));
+        _serviceRepository = new Lazy<IServiceRepository>(() => new ServiceRepository(_repositoryContext));
     }
 
     public IDoctorRepository Doctors => _doctorRepository.Value;
@@ -27,5 +29,6 @@ public class RepositoryManager : IRepositoryManager
     public IPatientRepository Patients => _patientRepository.Value;
     public ISupplierRepository Suppliers => _supplierRepository.Value;
     public ICategoryServiceRepository CategoryServices => _categoryServiceRepository.Value;
+    public IServiceRepository Services => _serviceRepository.Value;
     public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
 }

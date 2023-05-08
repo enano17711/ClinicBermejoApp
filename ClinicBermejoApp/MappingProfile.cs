@@ -7,6 +7,7 @@ using Shared.CategoryService;
 using Shared.Doctors;
 using Shared.Nurses;
 using Shared.Patients;
+using Shared.Services;
 using Shared.Suppliers;
 
 namespace ClinicBermejoApp;
@@ -34,5 +35,9 @@ public class MappingProfile : Profile
         CreateMap<CategoryServiceDto, CategoryService>().ReverseMap();
         CreateMap<CategoryServiceForCreationDto, CategoryService>().ReverseMap();
         CreateMap<CategoryServiceForUpdateDto, CategoryService>().ReverseMap();
+
+        CreateMap<ServiceDto, Entities.Models.Services.Service>().ReverseMap();
+        CreateMap<ServiceForCreationDto, Entities.Models.Services.Service>().ReverseMap();
+        CreateMap<ServiceForUpdateDto, Entities.Models.Services.Service>().ReverseMap();
     }
 }
