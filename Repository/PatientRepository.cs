@@ -1,22 +1,40 @@
 ﻿using Contracts;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
+using Shared.RequestFeatures;
 
 namespace Repository;
 
-public class PatientRepository : RepositoryBase<Patient>, IPatientRepository
+public class PatientRepository : RepositoryBase<Patient>,
+    IPatientRepository
 {
     public PatientRepository(RepositoryContext repositoryContext) : base(repositoryContext)
     {
     }
 
-    public async Task<IEnumerable<Patient>> GetPatientsAsync(bool trackChanges) =>
-        await FindAll(trackChanges).OrderBy(p => p.Name).ToListAsync();
+    public async Task<PagedList<Patient>> GetPatientsAsync(PatientParameters parameters,
+        bool trackChanges)
+    {
+        var patients = await FindAll(trackChanges)
+            .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
+            .SortGeneric(parameters.SortColumn, parameters.SortOrder)
+            .ToListAsync();
 
-    public async Task<Patient> GetPatientByIdsAsync(Guid id, bool trackChanges) =>
-        await FindByCondition(p => p.Id.Equals(id), trackChanges).SingleOrDefaultAsync();
+        return PagedList<Patient>.ToPagedList(patients,
+            parameters.PageNumber,
+            parameters.PageSize);
+    }
 
-    public void CreatePatient(Patient patient) => Create(patient);
+    public async Task<Patient?> GetPatientByIdAsync(Guid id,
+        bool trackChanges) =>
+        await FindByCondition(d => d.Id.Equals(id),
+                trackChanges)
+            .SingleOrDefaultAsync();
 
-    public void DeletePatient(Patient patient) => Delete(patient);
+    public void CreatePatient(Patient patient) =>
+        Create(patient);
+
+    public void DeletePatient(Patient patient) =>
+        Delete(patient);
 }

@@ -5,6 +5,7 @@ using Entities.Models;
 using Service.Contracts;
 using Shared;
 using Shared.Patients;
+using Shared.RequestFeatures;
 
 namespace Service;
 
@@ -14,7 +15,6 @@ public class PatientService : IPatientService
     private readonly IMapper _mapper;
     private readonly ILoggerManager _logger;
 
-
     public PatientService(IRepositoryManager repository, IMapper mapper, ILoggerManager logger)
     {
         _repository = repository;
@@ -22,10 +22,14 @@ public class PatientService : IPatientService
         _logger = logger;
     }
 
-    public async Task<IEnumerable<PatientDto>> GetPatientsAsync(bool trackChanges)
+    public async Task<(IEnumerable<PatientDto> patients, MetaData metaData)> GetPatientsAsync(
+        PatientParameters parameters,
+        bool trackChanges)
     {
-        var patients = await _repository.Patients.GetPatientsAsync(trackChanges);
-        return _mapper.Map<IEnumerable<PatientDto>>(patients);
+        var patientsWithMetaData = await _repository.Patients.GetPatientsAsync(parameters, trackChanges);
+        var patientsDto = _mapper.Map<IEnumerable<PatientDto>>(patientsWithMetaData);
+
+        return (patientsDto, patientsWithMetaData.MetaData);
     }
 
     public async Task<PatientDto> GetPatientByIdAsync(Guid id, bool trackChanges)
@@ -58,7 +62,7 @@ public class PatientService : IPatientService
 
     private async Task<Patient> GetPatientAndCheckIfItExists(Guid id, bool trackChanges)
     {
-        var patient = await _repository.Patients.GetPatientByIdsAsync(id, trackChanges);
+        var patient = await _repository.Patients.GetPatientByIdAsync(id, trackChanges);
         if (patient is null) throw new PatientNotFoundException(id);
         return patient;
     }
