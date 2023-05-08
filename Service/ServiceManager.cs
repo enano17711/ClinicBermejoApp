@@ -10,6 +10,7 @@ public class ServiceManager : IServiceManager
     private readonly Lazy<IPatientService> _patientService;
     private readonly Lazy<INurseService> _nurseService;
     private readonly Lazy<ISupplierService> _supplierService;
+    private readonly Lazy<ICategoryServiceService> _categoryServiceService;
 
     public ServiceManager(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
     {
@@ -17,10 +18,13 @@ public class ServiceManager : IServiceManager
         _patientService = new Lazy<IPatientService>(() => new PatientService(repository, mapper, logger));
         _nurseService = new Lazy<INurseService>(() => new NurseService(repository, mapper, logger));
         _supplierService = new Lazy<ISupplierService>(() => new SupplierService(repository, mapper, logger));
+        _categoryServiceService =
+            new Lazy<ICategoryServiceService>(() => new CategoryServiceService(repository, mapper, logger));
     }
 
     public IDoctorService DoctorService => _doctorService.Value;
     public IPatientService PatientService => _patientService.Value;
     public INurseService NurseService => _nurseService.Value;
     public ISupplierService SupplierService => _supplierService.Value;
+    public ICategoryServiceService CategoryServiceService => _categoryServiceService.Value;
 }

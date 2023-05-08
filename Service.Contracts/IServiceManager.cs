@@ -6,4 +6,5 @@ public interface IServiceManager
     IPatientService PatientService { get; }
     INurseService NurseService { get; }
     ISupplierService SupplierService { get; }
+    ICategoryServiceService CategoryServiceService { get; }
 }
