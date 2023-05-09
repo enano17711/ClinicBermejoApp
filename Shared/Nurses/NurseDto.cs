@@ -1,4 +1,7 @@
-﻿namespace Shared.Nurses;
+﻿using Shared.Appointments;
+using Shared.Patients;
+
+namespace Shared.Nurses;
 
 public record NurseDto
 {
@@ -21,4 +24,8 @@ public record NurseDto
     public DateTime? Date { get; init; }
 
     public string? Address { get; init; }
+
+    public IEnumerable<PatientForViewDto>? Patients { get; set; }
+
+    public IEnumerable<AppointmentForViewDto>? Appointments { get; set; }
 }

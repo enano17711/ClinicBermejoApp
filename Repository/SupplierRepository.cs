@@ -19,6 +19,7 @@ public class SupplierRepository : RepositoryBase<Supplier>,
         var suppliers = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
+            .Include(s => s.Movements)
             .ToListAsync();
 
         return PagedList<Supplier>.ToPagedList(suppliers,
@@ -30,6 +31,7 @@ public class SupplierRepository : RepositoryBase<Supplier>,
         bool trackChanges) =>
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
+            .Include(s => s.Movements)
             .SingleOrDefaultAsync();
 
     public void CreateSupplier(Supplier supplier) =>

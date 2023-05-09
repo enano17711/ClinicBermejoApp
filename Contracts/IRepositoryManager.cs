@@ -9,5 +9,13 @@ public interface IRepositoryManager
     ICategoryServiceRepository CategoryServices { get; }
     IServiceRepository Services { get; }
     IServiceDoctorRepository ServiceDoctors { get; }
+    IAppointmentRepository Appointments { get; }
+    IAppointmentDoctorRepository AppointmentDoctors { get; }
+    IMovementRepository Movements { get; }
+    IDetailMovementRepository DetailMovements { get; }
+    IBrandRepository Brands { get; }
+    IUnitRepository Units { get; }
+    ICategoryItemRepository CategoryItems { get; }
+    IItemRepository Items { get; }
     Task SaveAsync();
 }

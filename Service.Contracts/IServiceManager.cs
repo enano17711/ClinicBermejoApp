@@ -9,4 +9,12 @@ public interface IServiceManager
     ICategoryServiceService CategoryServiceService { get; }
     IServiceService ServiceService { get; }
     IServiceDoctorService ServiceDoctorService { get; }
+    IAppointmentService AppointmentService { get; }
+    IAppointmentDoctorService AppointmentDoctorService { get; }
+    IMovementService MovementService { get; }
+    IDetailMovementService DetailMovementService { get; }
+    IBrandService BrandService { get; }
+    IUnitService UnitService { get; }
+    ICategoryItemService CategoryItemService { get; }
+    IItemService ItemService { get; }
 }

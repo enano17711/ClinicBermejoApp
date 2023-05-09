@@ -1,4 +1,9 @@
-﻿namespace Shared.Doctors;
+﻿using Shared.AppointmentDoctors;
+using Shared.Appointments;
+using Shared.Patients;
+using Shared.ServiceDoctors;
+
+namespace Shared.Doctors;
 
 public record DoctorDto
 {
@@ -21,4 +26,12 @@ public record DoctorDto
     public DateTime? Date { get; init; }
 
     public string? Address { get; init; }
+
+    public IEnumerable<AppointmentForViewDto>? Appointments { get; set; }
+
+    public IEnumerable<PatientForViewDto>? Patients { get; set; }
+
+    public IEnumerable<ServiceDoctorForViewDto>? ServiceDoctors { get; set; }
+
+    public IEnumerable<AppointmentDoctorForViewDto>? AppointmentDoctors { get; set; }
 }

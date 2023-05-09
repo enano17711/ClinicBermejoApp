@@ -21,6 +21,10 @@ public class DoctorRepository : RepositoryBase<Doctor>,
             .Filter(parameters.Specialty)
             .Search(parameters.SearchColumn, parameters.SearchTerm)
             .Sort(parameters.SortColumn, parameters.SortOrder)
+            .Include(d => d.Appointments)
+            .Include(d => d.ServiceDoctors)
+            .Include(d => d.AppointmentDoctors)
+            .Include(d => d.Patients)
             .ToListAsync();
 
         return PagedList<Doctor>.ToPagedList(doctors,
@@ -32,6 +36,10 @@ public class DoctorRepository : RepositoryBase<Doctor>,
         bool trackChanges) =>
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
+            .Include(d => d.Appointments)
+            .Include(d => d.ServiceDoctors)
+            .Include(d => d.AppointmentDoctors)
+            .Include(d => d.Patients)
             .SingleOrDefaultAsync();
 
     public void CreateDoctor(Doctor doctor) =>

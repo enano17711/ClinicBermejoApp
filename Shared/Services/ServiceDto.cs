@@ -10,5 +10,5 @@ public record ServiceDto
     public string? Description { get; set; }
     public decimal Price { get; set; }
     public CategoryServiceForViewDto? CategoryService { get; set; }
-    public IEnumerable<ServiceDoctorDto>? ServiceDoctors { get; set; }
+    public IEnumerable<ServiceDoctorForViewDto>? ServiceDoctors { get; set; }
 }

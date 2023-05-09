@@ -19,6 +19,9 @@ public class PatientRepository : RepositoryBase<Patient>,
         var patients = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
+            .Include(p => p.Doctor)
+            .Include(p => p.Nurse)
+            .Include(p => p.Appointments)
             .ToListAsync();
 
         return PagedList<Patient>.ToPagedList(patients,
@@ -30,6 +33,9 @@ public class PatientRepository : RepositoryBase<Patient>,
         bool trackChanges) =>
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
+            .Include(p => p.Doctor)
+            .Include(p => p.Nurse)
+            .Include(p => p.Appointments)
             .SingleOrDefaultAsync();
 
     public void CreatePatient(Patient patient) =>

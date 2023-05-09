@@ -11,5 +11,5 @@ public record ServiceDoctorDto
 
     public ServiceForViewDto? Service { get; set; }
 
-    public DoctorDto? Doctor { get; set; }
+    public DoctorForViewDto? Doctor { get; set; }
 }
