@@ -14,7 +14,7 @@ public static class GenericRepositoryExtension
             string.IsNullOrEmpty(searchColumn))
             return source;
 
-        return source.Where($"s => s.{searchColumn}.ToLower().Contains(@0)",
+        return source.Where($"s => s.{searchColumn}.ToString().ToLower().Contains(@0)",
             searchTerm.Trim()
                 .ToLower());
     }
