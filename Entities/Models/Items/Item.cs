@@ -13,9 +13,7 @@ public class Item : BaseItem
 
     [ForeignKey(nameof(Brand))] public Guid? BrandId { get; set; }
     public Brand? Brand { get; set; }
-
-    [ForeignKey(nameof(Unit))] public Guid? UnitId { get; set; }
-    public Unit? Unit { get; set; }
-
+    
+    public ICollection<ItemUnit>? ItemUnits { get; set; }
     public ICollection<DetailMovement>? DetailMovements { get; set; }
 }

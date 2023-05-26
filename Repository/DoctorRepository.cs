@@ -18,11 +18,14 @@ public class DoctorRepository : RepositoryBase<Doctor>,
         bool trackChanges)
     {
         var doctors = await FindAll(trackChanges)
-            .Filter(parameters.Specialty)
-            .Search(parameters.SearchColumn, parameters.SearchTerm)
-            .Sort(parameters.SortColumn, parameters.SortOrder)
+            .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
+            .SortGeneric(parameters.SortColumn, parameters.SortOrder)
             .Include(d => d.Appointments)
+            .ThenInclude(ap => ap.Patient)
+            .Include(d => d.Appointments)
+            .ThenInclude(ap => ap.Nurse)
             .Include(d => d.ServiceDoctors)
+            .ThenInclude(sd => sd.Service)
             .Include(d => d.AppointmentDoctors)
             .Include(d => d.Patients)
             .ToListAsync();
@@ -37,7 +40,11 @@ public class DoctorRepository : RepositoryBase<Doctor>,
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
             .Include(d => d.Appointments)
+            .ThenInclude(ap => ap.Patient)
+            .Include(d => d.Appointments)
+            .ThenInclude(ap => ap.Nurse)
             .Include(d => d.ServiceDoctors)
+            .ThenInclude(sd => sd.Service)
             .Include(d => d.AppointmentDoctors)
             .Include(d => d.Patients)
             .SingleOrDefaultAsync();

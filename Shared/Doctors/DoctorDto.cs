@@ -27,11 +27,11 @@ public record DoctorDto
 
     public string? Address { get; init; }
 
-    public IEnumerable<AppointmentForViewDto>? Appointments { get; set; }
+    public IEnumerable<AppointmentForDoctorViewDto>? Appointments { get; init; }
 
     public IEnumerable<PatientForViewDto>? Patients { get; set; }
 
-    public IEnumerable<ServiceDoctorForViewDto>? ServiceDoctors { get; set; }
+    public IEnumerable<ServiceDoctorForDoctorViewDto>? ServiceDoctors { get; set; }
 
-    public IEnumerable<AppointmentDoctorForViewDto>? AppointmentDoctors { get; set; }
+    public IEnumerable<AppointmentDoctorForDoctorViewDto>? AppointmentDoctors { get; set; }
 }

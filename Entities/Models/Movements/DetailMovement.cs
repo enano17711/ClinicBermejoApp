@@ -12,12 +12,11 @@ public class DetailMovement
     [Required(ErrorMessage = "El Monto es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
     [Precision(18, 2)]
-    public decimal Amount { get; set; }
+    public decimal Cost { get; set; }
 
     [Required(ErrorMessage = "La Cantidad es requerida")]
-    [Range(0, double.MaxValue, ErrorMessage = "La Cantidad debe ser positiva")]
-    [Precision(18, 2)]
-    public decimal Quantity { get; set; }
+    public uint Quantity { get; set; }
+    public uint SingleUnits { get; set; }
 
     [Required(ErrorMessage = "La Fecha es requerida")]
     public DateTime Date { get; set; }
@@ -25,11 +24,14 @@ public class DetailMovement
     public string? Allotment { get; set; }
 
     [Required(ErrorMessage = "El tipo de Vencimiento es requerido")]
-    public char IsAllotment { get; set; }
+    public bool? IsAllotment { get; set; }
 
     [ForeignKey(nameof(Movement))] public Guid? MovementId { get; set; }
     public Movement? Movement { get; set; }
 
     [ForeignKey(nameof(Item))] public Guid? ItemId { get; set; }
     public Item? Item { get; set; }
+    
+    [ForeignKey(nameof(Unit))] public Guid? UnitId { get; set; }
+    public Unit? Unit { get; set; }
 }

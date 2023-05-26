@@ -19,7 +19,8 @@ public class UnitRepository : RepositoryBase<Unit>,
         var units = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
-            .Include(u => u.Items)
+            .Include(u => u.ItemUnits)!
+            .ThenInclude(iu => iu.Item)
             .ToListAsync();
 
         return PagedList<Unit>.ToPagedList(units,
@@ -31,7 +32,8 @@ public class UnitRepository : RepositoryBase<Unit>,
         bool trackChanges) =>
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
-            .Include(u => u.Items)
+            .Include(u => u.ItemUnits)!
+            .ThenInclude(iu => iu.Item)
             .SingleOrDefaultAsync();
 
     public void CreateUnit(Unit unit) =>

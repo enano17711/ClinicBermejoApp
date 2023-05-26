@@ -62,16 +62,19 @@ public class MappingProfile : Profile
         CreateMap<ServiceDoctorForCreationDto, ServiceDoctor>().ReverseMap();
         CreateMap<ServiceDoctorForUpdateDto, ServiceDoctor>().ReverseMap();
         CreateMap<ServiceDoctorForViewDto, ServiceDoctor>().ReverseMap();
+        CreateMap<ServiceDoctorForDoctorViewDto, ServiceDoctor>().ReverseMap();
 
         CreateMap<AppointmentDto, Appointment>().ReverseMap();
         CreateMap<AppointmentForCreationDto, Appointment>().ReverseMap();
         CreateMap<AppointmentForUpdateDto, Appointment>().ReverseMap();
         CreateMap<AppointmentForViewDto, Appointment>().ReverseMap();
+        CreateMap<AppointmentForDoctorViewDto, Appointment>().ReverseMap();
 
         CreateMap<AppointmentDoctorDto, AppointmentDoctor>().ReverseMap();
         CreateMap<AppointmentDoctorForCreationDto, AppointmentDoctor>().ReverseMap();
         CreateMap<AppointmentDoctorForUpdateDto, AppointmentDoctor>().ReverseMap();
         CreateMap<AppointmentDoctorForViewDto, AppointmentDoctor>().ReverseMap();
+        CreateMap<AppointmentDoctorForDoctorViewDto, AppointmentDoctor>().ReverseMap();
 
         CreateMap<MovementDto, Movement>().ReverseMap();
         CreateMap<MovementForCreationDto, Movement>().ReverseMap();

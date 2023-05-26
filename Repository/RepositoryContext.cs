@@ -39,6 +39,7 @@ public class RepositoryContext : DbContext
     public DbSet<Movement> Movements { get; set; }
 
     public DbSet<DetailMovement> DetailMovements { get; set; }
+    public DbSet<Note> Notes { get; set; }
 
     // services
     public DbSet<Service> Services { get; set; }
@@ -59,6 +60,7 @@ public class RepositoryContext : DbContext
         modelBuilder.Entity<Brand>();
         modelBuilder.Entity<Movement>();
         modelBuilder.Entity<DetailMovement>();
+        modelBuilder.Entity<Note>();
         modelBuilder.Entity<Service>();
         modelBuilder.Entity<CategoryService>();
         modelBuilder.Entity<ServiceDoctor>();

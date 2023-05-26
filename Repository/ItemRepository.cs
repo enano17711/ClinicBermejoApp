@@ -21,7 +21,8 @@ public class ItemRepository : RepositoryBase<Item>,
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
             .Include(i => i.Brand)
             .Include(i => i.CategoryItem)
-            .Include(i => i.Unit)
+            .Include(i => i.ItemUnits)!
+            .ThenInclude(iu=> iu.Unit)
             .Include(i => i.DetailMovements)
             .ToListAsync();
 
@@ -36,7 +37,8 @@ public class ItemRepository : RepositoryBase<Item>,
                 trackChanges)
             .Include(i => i.Brand)
             .Include(i => i.CategoryItem)
-            .Include(i => i.Unit)
+            .Include(i => i.ItemUnits)!
+            .ThenInclude(iu=> iu.Unit)
             .Include(i => i.DetailMovements)
             .SingleOrDefaultAsync();
 
