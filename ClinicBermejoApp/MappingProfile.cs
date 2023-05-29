@@ -105,5 +105,7 @@ public class MappingProfile : Profile
         CreateMap<ItemForCreationDto, Item>().ReverseMap();
         CreateMap<ItemForUpdateDto, Item>().ReverseMap();
         CreateMap<ItemForViewDto, Item>().ReverseMap();
+
+        CreateMap<ItemUnitForCreationDto, ItemUnit>().ReverseMap();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Shared.Items;
+﻿using Shared.DetailMovements;
+using Shared.Items;
 
 namespace Shared.Units;
 

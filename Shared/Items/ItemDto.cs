@@ -17,7 +17,5 @@ public record ItemDto
 
     public BrandForViewDto? Brand { get; set; }
 
-    public UnitForViewDto? Unit { get; set; }
-
-    public ICollection<DetailMovementForViewDto>? DetailMovements { get; set; }
+    public ICollection<UnitForViewDto>? Units { get; set; }
 }

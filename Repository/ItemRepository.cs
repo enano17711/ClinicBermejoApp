@@ -20,10 +20,8 @@ public class ItemRepository : RepositoryBase<Item>,
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
             .Include(i => i.Brand)
+            .Include(i => i.Units)
             .Include(i => i.CategoryItem)
-            .Include(i => i.ItemUnits)!
-            .ThenInclude(iu=> iu.Unit)
-            .Include(i => i.DetailMovements)
             .ToListAsync();
 
         return PagedList<Item>.ToPagedList(items,
@@ -36,14 +34,14 @@ public class ItemRepository : RepositoryBase<Item>,
         await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
             .Include(i => i.Brand)
+            .Include(i => i.Units)
             .Include(i => i.CategoryItem)
-            .Include(i => i.ItemUnits)!
-            .ThenInclude(iu=> iu.Unit)
-            .Include(i => i.DetailMovements)
             .SingleOrDefaultAsync();
 
-    public void CreateItem(Item item) =>
+    public void CreateItem(Item item)
+    {
         Create(item);
+    }
 
     public void DeleteItem(Item item) =>
         Delete(item);

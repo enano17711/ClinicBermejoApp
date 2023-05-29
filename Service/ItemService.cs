@@ -40,6 +40,15 @@ public class ItemService : IItemService
     public async Task<ItemDto> CreateItemAsync(ItemForCreationDto item)
     {
         var itemEntity = _mapper.Map<Item>(item);
+        if (item.UnitIds != null)
+            foreach (var itemUnitId in item.UnitIds)
+            {
+                var unit = await _repository.Units.GetUnitByIdAsync(itemUnitId, trackChanges: false);
+                if (unit is null) throw new UnitNotFoundException(itemUnitId);
+                itemEntity.Units?.Add(unit);
+            }
+
+        // var itemEntity = _mapper.Map<Item>(item);
         _repository.Items.CreateItem(itemEntity);
         await _repository.SaveAsync();
         return _mapper.Map<ItemDto>(itemEntity);
@@ -55,6 +64,18 @@ public class ItemService : IItemService
     public async Task UpdateItemAsync(Guid id, ItemForUpdateDto item, bool trackChanges)
     {
         var itemEntity = await GetItemAndCheckIfItExists(id: id, trackChanges: trackChanges);
+
+        if (item.UnitIds != null)
+        {
+            itemEntity.Units?.Clear();
+            foreach (var itemUnitId in item.UnitIds)
+            {
+                var unit = await _repository.Units.GetUnitByIdAsync(itemUnitId, trackChanges: false);
+                if (unit is null) throw new UnitNotFoundException(itemUnitId);
+                itemEntity.Units?.Add(unit);
+            }
+        }
+
         _mapper.Map(item, itemEntity);
         await _repository.SaveAsync();
     }

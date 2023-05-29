@@ -14,6 +14,4 @@ public abstract record ItemForManipulationDto
     public Guid? CategoryItemId { get; set; }
 
     public Guid? BrandId { get; set; }
-
-    public Guid? UnitId { get; set; }
 }
