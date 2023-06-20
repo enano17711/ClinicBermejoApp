@@ -59,7 +59,7 @@ public class ItemController : ControllerBase
 
     [HttpPost("ItemUnit")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateItemUnit([FromBody] ItemUnitForCreationDto item)
+    public async Task<IActionResult> CreateItemUnit([FromBody] ItemUnitForManipulationDto item)
     {
         await _service.ItemService.CreateItemUnitAsync(item);
         return NoContent();
@@ -67,9 +67,25 @@ public class ItemController : ControllerBase
 
     [HttpDelete("ItemUnit")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> DeleteItemUnit([FromBody] ItemUnitForCreationDto item)
+    public async Task<IActionResult> DeleteItemUnit([FromBody] ItemUnitForManipulationDto item)
     {
         await _service.ItemService.DeleteItemUnitAsync(item);
+        return NoContent();
+    }
+
+    [HttpPost("CategoryItemMN")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> CreateCategoryItemMN([FromBody] CategoryItemMNForManipulationDto item)
+    {
+        await _service.ItemService.CreateCategoryItemMNAsync(item);
+        return NoContent();
+    }
+
+    [HttpDelete("CategoryItemMN")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> DeleteCategoryItemMN([FromBody] CategoryItemMNForManipulationDto item)
+    {
+        await _service.ItemService.DeleteCategoryItemMNAsync(item);
         return NoContent();
     }
 }

@@ -37,29 +37,29 @@ public class ItemService : IItemService
         return _mapper.Map<ItemDto>(item);
     }
 
-    public async Task<ItemDto> CreateItemAsync(ItemForCreationDto item)
+    public async Task<ItemDto> CreateItemAsync(ItemForCreationDto itemDto)
     {
-        var itemEntity = _mapper.Map<Item>(item);
-        _repository.Items.CreateItem(itemEntity);
+        var item = _mapper.Map<Item>(itemDto);
+        _repository.Items.CreateItem(item);
         await _repository.SaveAsync();
 
-        itemEntity = await _repository.Items.GetItemByIdAsync(itemEntity.Id, false);
+        item = await _repository.Items.GetItemByIdAsync(item.Id, trackChanges: false);
 
-        foreach (var unitId in item.UnitIds!)
+        foreach (var unitId in itemDto.UnitIds!)
         {
             var unit = await GetUnitAndCheckIfItExists(id: unitId, trackChanges: false);
-            _repository.ItemUnits.CreateItemUnit(new ItemUnit { ItemId = itemEntity!.Id, UnitId = unit.Id });
+            _repository.ItemUnits.CreateItemUnit(new ItemUnit { ItemId = item.Id, UnitId = unit.Id });
         }
 
-        foreach (var categoryItemId in item.CategoryItemIds!)
+        foreach (var categoryId in itemDto.CategoryItemIds!)
         {
-            var categoryItem = await GetCategoryItemAndCheckIfItExists(id: categoryItemId, trackChanges: false);
+            var categoryItem = await GetCategoryItemAndCheckIfItExists(id: categoryId, trackChanges: false);
             _repository.CategoryItemMNs.CreateCategoryItemMN(new CategoryItemMN
-                { ItemId = itemEntity!.Id, CategoryItemId = categoryItem.Id });
+                { ItemId = item!.Id, CategoryItemId = categoryItem.Id });
         }
 
         await _repository.SaveAsync();
-        return _mapper.Map<ItemDto>(itemEntity);
+        return _mapper.Map<ItemDto>(item);
     }
 
     public async Task DeleteItemAsync(Guid id, bool trackChanges)
@@ -76,16 +76,33 @@ public class ItemService : IItemService
         await _repository.SaveAsync();
     }
 
-    public async Task CreateItemUnitAsync(ItemUnitForCreationDto itemUnit)
+    public async Task CreateItemUnitAsync(ItemUnitForManipulationDto itemUnit)
     {
         _repository.ItemUnits.CreateItemUnit(new ItemUnit { ItemId = itemUnit.ItemId, UnitId = itemUnit.UnitId });
         await _repository.SaveAsync();
     }
 
-    public async Task DeleteItemUnitAsync(ItemUnitForCreationDto itemUnit)
+    public async Task DeleteItemUnitAsync(ItemUnitForManipulationDto itemUnit)
     {
         var itemUnitEntity = await _repository.ItemUnits.GetItemUnitByIdAsync(itemUnit.ItemId, itemUnit.UnitId, false);
         _repository.ItemUnits.DeleteItemUnit(itemUnitEntity);
+        await _repository.SaveAsync();
+    }
+
+    public async Task CreateCategoryItemMNAsync(CategoryItemMNForManipulationDto categoryItemMn)
+    {
+        _repository.CategoryItemMNs.CreateCategoryItemMN(new CategoryItemMN
+            { ItemId = categoryItemMn.ItemId, CategoryItemId = categoryItemMn.CategoryItemId });
+        await _repository.SaveAsync();
+    }
+
+    public async Task DeleteCategoryItemMNAsync(CategoryItemMNForManipulationDto categoryItemMn)
+    {
+        var categoryItemMnEntity =
+            await _repository.CategoryItemMNs.GetCategoryItemMNByIdAsync(categoryItemMn.ItemId,
+                categoryItemMn.CategoryItemId,
+                false);
+        _repository.CategoryItemMNs.DeleteCategoryItemMN(categoryItemMnEntity);
         await _repository.SaveAsync();
     }
 
