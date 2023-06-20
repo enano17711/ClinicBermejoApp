@@ -12,4 +12,6 @@ public interface IItemService
     Task<ItemDto> CreateItemAsync(ItemForCreationDto item);
     Task DeleteItemAsync(Guid id, bool trackChanges);
     Task UpdateItemAsync(Guid id, ItemForUpdateDto item, bool trackChanges);
+    Task CreateItemUnitAsync(ItemUnitForCreationDto itemUnit);
+    Task DeleteItemUnitAsync(ItemUnitForCreationDto itemUnit);
 }

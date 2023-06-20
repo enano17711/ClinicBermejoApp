@@ -30,13 +30,13 @@ public class ItemUnitRepository : RepositoryBase<ItemUnit>,
             parameters.PageSize);
     }
 
-    public async Task<ItemUnit?> GetItemUnitByIdAsync(Guid id,
-        bool trackChanges) => new ItemUnit();
-    // await FindByCondition(d => d.Id.Equals(id),
-    //         trackChanges)
-    //     .Include(iu => iu.Item)
-    //     .Include(iu => iu.Unit)
-    //     .SingleOrDefaultAsync();
+    public async Task<ItemUnit?> GetItemUnitByIdAsync(Guid itemId, Guid unitId,
+        bool trackChanges) =>
+        await FindByCondition(iu => iu.ItemId == itemId && iu.UnitId == unitId,
+                trackChanges)
+            .Include(iu => iu.Item)
+            .Include(iu => iu.Unit)
+            .SingleOrDefaultAsync();
 
     public void CreateItemUnit(ItemUnit itemUnit) =>
         Create(itemUnit);

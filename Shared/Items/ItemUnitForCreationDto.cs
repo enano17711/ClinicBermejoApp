@@ -1,8 +1,13 @@
-﻿using Shared.Units;
+﻿using System.ComponentModel.DataAnnotations;
+using Shared.Units;
 
 namespace Shared.Items;
 
-public record ItemUnitForCreationDto : ItemForManipulationDto
+public record ItemUnitForCreationDto
 {
-    public ICollection<UnitForCreationDto>? Units { get; init; }
+    [Required(ErrorMessage = "El item es necesario para la relacion")]
+    public Guid ItemId { get; init; }
+
+    [Required(ErrorMessage = "La unidad es necesaria para la relacion")]
+    public Guid UnitId { get; init; }
 }

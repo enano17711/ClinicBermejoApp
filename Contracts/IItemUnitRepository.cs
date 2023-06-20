@@ -9,6 +9,6 @@ public interface IItemUnitRepository
 {
     Task<PagedList<ItemUnit>> GetItemUnitsAsync(ItemUnitParameters parameters, bool trackChanges);
     void CreateItemUnit(ItemUnit itemUnit);
-    Task<ItemUnit?> GetItemUnitByIdAsync(Guid id, bool trackChanges);
+    Task<ItemUnit?> GetItemUnitByIdAsync(Guid itemId, Guid unitId, bool trackChanges);
     void DeleteItemUnit(ItemUnit itemUnit);
 }

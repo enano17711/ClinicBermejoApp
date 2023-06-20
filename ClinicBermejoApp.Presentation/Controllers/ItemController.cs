@@ -56,4 +56,20 @@ public class ItemController : ControllerBase
         await _service.ItemService.UpdateItemAsync(id, item, true);
         return NoContent();
     }
+
+    [HttpPost("ItemUnit")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> CreateItemUnit([FromBody] ItemUnitForCreationDto item)
+    {
+        await _service.ItemService.CreateItemUnitAsync(item);
+        return NoContent();
+    }
+
+    [HttpDelete("ItemUnit")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> DeleteItemUnit([FromBody] ItemUnitForCreationDto item)
+    {
+        await _service.ItemService.DeleteItemUnitAsync(item);
+        return NoContent();
+    }
 }

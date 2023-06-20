@@ -76,6 +76,19 @@ public class ItemService : IItemService
         await _repository.SaveAsync();
     }
 
+    public async Task CreateItemUnitAsync(ItemUnitForCreationDto itemUnit)
+    {
+        _repository.ItemUnits.CreateItemUnit(new ItemUnit { ItemId = itemUnit.ItemId, UnitId = itemUnit.UnitId });
+        await _repository.SaveAsync();
+    }
+
+    public async Task DeleteItemUnitAsync(ItemUnitForCreationDto itemUnit)
+    {
+        var itemUnitEntity = await _repository.ItemUnits.GetItemUnitByIdAsync(itemUnit.ItemId, itemUnit.UnitId, false);
+        _repository.ItemUnits.DeleteItemUnit(itemUnitEntity);
+        await _repository.SaveAsync();
+    }
+
     private async Task<Item> GetItemAndCheckIfItExists(Guid id, bool trackChanges)
     {
         var item = await _repository.Items.GetItemByIdAsync(id, trackChanges);
