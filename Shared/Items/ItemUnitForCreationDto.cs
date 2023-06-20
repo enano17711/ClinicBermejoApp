@@ -1,7 +1,8 @@
-﻿namespace Shared.Items;
+﻿using Shared.Units;
 
-public record ItemUnitForCreationDto
+namespace Shared.Items;
+
+public record ItemUnitForCreationDto : ItemForManipulationDto
 {
-    public Guid ItemId { get; set; }
-    public Guid UnitId { get; set; }
+    public ICollection<UnitForCreationDto>? Units { get; init; }
 }

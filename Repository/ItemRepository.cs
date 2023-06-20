@@ -21,7 +21,7 @@ public class ItemRepository : RepositoryBase<Item>,
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
             .Include(i => i.Brand)
             .Include(i => i.Units)
-            .Include(i => i.CategoryItem)
+            .Include(i => i.CategoryItems)
             .ToListAsync();
 
         return PagedList<Item>.ToPagedList(items,
@@ -35,7 +35,7 @@ public class ItemRepository : RepositoryBase<Item>,
                 trackChanges)
             .Include(i => i.Brand)
             .Include(i => i.Units)
-            .Include(i => i.CategoryItem)
+            .Include(i => i.CategoryItems)
             .SingleOrDefaultAsync();
 
     public void CreateItem(Item item)

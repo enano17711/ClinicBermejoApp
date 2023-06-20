@@ -11,7 +11,5 @@ public abstract record ItemForManipulationDto
     [MaxLength(500, ErrorMessage = "La descripción no puede tener más de 500 caracteres")]
     public string? Description { get; set; }
 
-    public Guid? CategoryItemId { get; set; }
-
     public Guid? BrandId { get; set; }
 }

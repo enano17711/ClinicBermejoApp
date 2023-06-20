@@ -7,15 +7,10 @@ namespace Shared.Items;
 
 public record ItemDto
 {
-    public Guid Id { get; set; }
-
-    public string? Name { get; set; }
-
-    public string? Description { get; set; }
-
-    public CategoryItemForViewDto? CategoryItem { get; set; }
-
-    public BrandForViewDto? Brand { get; set; }
-
-    public ICollection<UnitForViewDto>? Units { get; set; }
+    public Guid Id { get; init; }
+    public string? Name { get; init; }
+    public string? Description { get; init; }
+    public ICollection<CategoryItemForViewDto>? CategoryItems { get; init; }
+    public ICollection<UnitForViewDto>? Units { get; init; }
+    public BrandForViewDto? Brand { get; init; }
 }

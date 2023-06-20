@@ -2,11 +2,11 @@
 
 namespace Entities.Models.Items;
 
-public class ItemUnit
+public class CategoryItemMN
 {
     [ForeignKey(nameof(Item))] public Guid? ItemId { get; set; }
     public Item? Item { get; set; }
 
-    [ForeignKey(nameof(Unit))] public Guid? UnitId { get; set; }
-    public Unit? Unit { get; set; }
+    [ForeignKey(nameof(CategoryItem))] public Guid? CategoryItemId { get; set; }
+    public CategoryItem? CategoryItem { get; set; }
 }
