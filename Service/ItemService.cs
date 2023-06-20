@@ -48,13 +48,14 @@ public class ItemService : IItemService
         foreach (var unitId in item.UnitIds!)
         {
             var unit = await GetUnitAndCheckIfItExists(id: unitId, trackChanges: false);
-            itemEntity!.Units!.Add(unit);
+            _repository.ItemUnits.CreateItemUnit(new ItemUnit { ItemId = itemEntity!.Id, UnitId = unit.Id });
         }
 
         foreach (var categoryItemId in item.CategoryItemIds!)
         {
             var categoryItem = await GetCategoryItemAndCheckIfItExists(id: categoryItemId, trackChanges: false);
-            itemEntity!.CategoryItems!.Add(categoryItem);
+            _repository.CategoryItemMNs.CreateCategoryItemMN(new CategoryItemMN
+                { ItemId = itemEntity!.Id, CategoryItemId = categoryItem.Id });
         }
 
         await _repository.SaveAsync();

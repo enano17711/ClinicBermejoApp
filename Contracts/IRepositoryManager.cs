@@ -17,5 +17,7 @@ public interface IRepositoryManager
     IUnitRepository Units { get; }
     ICategoryItemRepository CategoryItems { get; }
     IItemRepository Items { get; }
+    IItemUnitRepository ItemUnits { get; }
+    ICategoryItemMNRepository CategoryItemMNs { get; }
     Task SaveAsync();
 }

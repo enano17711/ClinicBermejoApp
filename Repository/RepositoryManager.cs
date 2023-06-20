@@ -21,6 +21,7 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<ICategoryItemRepository> _categoryItemRepository;
     private readonly Lazy<IItemRepository> _itemRepository;
     private readonly Lazy<IItemUnitRepository> _itemUnitRepository;
+    private readonly Lazy<ICategoryItemMNRepository> _categoryItemMNRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -46,6 +47,8 @@ public class RepositoryManager : IRepositoryManager
             new Lazy<ICategoryItemRepository>(() => new CategoryItemRepository(_repositoryContext));
         _itemRepository = new Lazy<IItemRepository>(() => new ItemRepository(_repositoryContext));
         _itemUnitRepository = new Lazy<IItemUnitRepository>(() => new ItemUnitRepository(_repositoryContext));
+        _categoryItemMNRepository = new Lazy<ICategoryItemMNRepository>(() =>
+            new CategoryItemMNRepository(_repositoryContext));
     }
 
     public IDoctorRepository Doctors => _doctorRepository.Value;
@@ -64,5 +67,6 @@ public class RepositoryManager : IRepositoryManager
     public ICategoryItemRepository CategoryItems => _categoryItemRepository.Value;
     public IItemRepository Items => _itemRepository.Value;
     public IItemUnitRepository ItemUnits => _itemUnitRepository.Value;
+    public ICategoryItemMNRepository CategoryItemMNs => _categoryItemMNRepository.Value;
     public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
 }
