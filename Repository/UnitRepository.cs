@@ -20,6 +20,7 @@ public class UnitRepository : RepositoryBase<Unit>,
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
             .Include(u => u.Items)
+            .Include(u => u.UnitBase)
             .ToListAsync();
 
         return PagedList<Unit>.ToPagedList(units,
@@ -28,15 +29,22 @@ public class UnitRepository : RepositoryBase<Unit>,
     }
 
     public async Task<Unit?> GetUnitByIdAsync(Guid id,
-        bool trackChanges) =>
-        await FindByCondition(d => d.Id.Equals(id),
+        bool trackChanges)
+    {
+        return await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
             .Include(u => u.Items)
+            .Include(u => u.UnitBase)
             .SingleOrDefaultAsync();
+    }
 
-    public void CreateUnit(Unit unit) =>
+    public void CreateUnit(Unit unit)
+    {
         Create(unit);
+    }
 
-    public void DeleteUnit(Unit unit) =>
+    public void DeleteUnit(Unit unit)
+    {
         Delete(unit);
+    }
 }
