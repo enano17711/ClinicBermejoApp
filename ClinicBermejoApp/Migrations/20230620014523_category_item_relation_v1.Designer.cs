@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace ClinicBermejoApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230620014523_category_item_relation_v1")]
+    partial class category_item_relation_v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -199,52 +202,9 @@ namespace ClinicBermejoApp.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Operation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("UnitBaseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<long>("Value")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UnitBaseId");
 
                     b.ToTable("Units");
-                });
-
-            modelBuilder.Entity("Entities.Models.Items.UnitBase", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("UnitBaseId");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UnitBases");
                 });
 
             modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
@@ -703,15 +663,6 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("Unit");
                 });
 
-            modelBuilder.Entity("Entities.Models.Items.Unit", b =>
-                {
-                    b.HasOne("Entities.Models.Items.UnitBase", "UnitBase")
-                        .WithMany("Units")
-                        .HasForeignKey("UnitBaseId");
-
-                    b.Navigation("UnitBase");
-                });
-
             modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
                 {
                     b.HasOne("Entities.Models.Items.Item", "Item")
@@ -816,11 +767,6 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("DetailMovements");
 
                     b.Navigation("ItemUnits");
-                });
-
-            modelBuilder.Entity("Entities.Models.Items.UnitBase", b =>
-                {
-                    b.Navigation("Units");
                 });
 
             modelBuilder.Entity("Entities.Models.Movements.Movement", b =>

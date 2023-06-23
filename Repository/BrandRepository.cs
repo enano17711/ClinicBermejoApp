@@ -13,6 +13,12 @@ public class BrandRepository : RepositoryBase<Brand>,
     {
     }
 
+    public async Task<List<Brand>> GetAllBrandsAsync()
+    {
+        var brands = await FindAll(false).ToListAsync();
+        return brands;
+    }
+
     public async Task<PagedList<Brand>> GetBrandsAsync(BrandParameters parameters,
         bool trackChanges)
     {

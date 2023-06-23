@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace ClinicBermejoApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230619234816_Unit_Item_update_relation")]
+    partial class Unit_Item_update_relation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +114,7 @@ namespace ClinicBermejoApp.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CategoryId");
+                        .HasColumnName("CategoryItemId");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -127,21 +130,6 @@ namespace ClinicBermejoApp.Migrations
                     b.ToTable("CategoryItems");
                 });
 
-            modelBuilder.Entity("Entities.Models.Items.CategoryItemMN", b =>
-                {
-                    b.Property<Guid?>("CategoryItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CategoryItemId", "ItemId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("CategoryItemMNs");
-                });
-
             modelBuilder.Entity("Entities.Models.Items.Item", b =>
                 {
                     b.Property<Guid>("Id")
@@ -150,6 +138,9 @@ namespace ClinicBermejoApp.Migrations
                         .HasColumnName("ItemId");
 
                     b.Property<Guid?>("BrandId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -165,18 +156,27 @@ namespace ClinicBermejoApp.Migrations
 
                     b.HasIndex("BrandId");
 
+                    b.HasIndex("CategoryItemId");
+
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("Entities.Models.Items.ItemUnit", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ItemUnitId");
+
                     b.Property<Guid?>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ItemId", "UnitId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.HasIndex("UnitId");
 
@@ -199,52 +199,9 @@ namespace ClinicBermejoApp.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Operation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("UnitBaseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<long>("Value")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UnitBaseId");
 
                     b.ToTable("Units");
-                });
-
-            modelBuilder.Entity("Entities.Models.Items.UnitBase", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("UnitBaseId");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UnitBases");
                 });
 
             modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
@@ -656,60 +613,34 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Entities.Models.Items.CategoryItemMN", b =>
-                {
-                    b.HasOne("Entities.Models.Items.CategoryItem", "CategoryItem")
-                        .WithMany("CategoryItemMNs")
-                        .HasForeignKey("CategoryItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Models.Items.Item", "Item")
-                        .WithMany("CategoryItemMNs")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CategoryItem");
-
-                    b.Navigation("Item");
-                });
-
             modelBuilder.Entity("Entities.Models.Items.Item", b =>
                 {
                     b.HasOne("Entities.Models.Items.Brand", "Brand")
                         .WithMany("Items")
                         .HasForeignKey("BrandId");
 
+                    b.HasOne("Entities.Models.Items.CategoryItem", "CategoryItem")
+                        .WithMany("Items")
+                        .HasForeignKey("CategoryItemId");
+
                     b.Navigation("Brand");
+
+                    b.Navigation("CategoryItem");
                 });
 
             modelBuilder.Entity("Entities.Models.Items.ItemUnit", b =>
                 {
                     b.HasOne("Entities.Models.Items.Item", "Item")
                         .WithMany("ItemUnits")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ItemId");
 
                     b.HasOne("Entities.Models.Items.Unit", "Unit")
                         .WithMany("ItemUnits")
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UnitId");
 
                     b.Navigation("Item");
 
                     b.Navigation("Unit");
-                });
-
-            modelBuilder.Entity("Entities.Models.Items.Unit", b =>
-                {
-                    b.HasOne("Entities.Models.Items.UnitBase", "UnitBase")
-                        .WithMany("Units")
-                        .HasForeignKey("UnitBaseId");
-
-                    b.Navigation("UnitBase");
                 });
 
             modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
@@ -799,13 +730,11 @@ namespace ClinicBermejoApp.Migrations
 
             modelBuilder.Entity("Entities.Models.Items.CategoryItem", b =>
                 {
-                    b.Navigation("CategoryItemMNs");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Entities.Models.Items.Item", b =>
                 {
-                    b.Navigation("CategoryItemMNs");
-
                     b.Navigation("DetailMovements");
 
                     b.Navigation("ItemUnits");
@@ -816,11 +745,6 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("DetailMovements");
 
                     b.Navigation("ItemUnits");
-                });
-
-            modelBuilder.Entity("Entities.Models.Items.UnitBase", b =>
-                {
-                    b.Navigation("Units");
                 });
 
             modelBuilder.Entity("Entities.Models.Movements.Movement", b =>

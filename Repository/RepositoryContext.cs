@@ -16,28 +16,24 @@ public class RepositoryContext : DbContext
 
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
-
-    // staff tables
+    // staff
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<Nurse> Nurses { get; set; }
-
     // appointment
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<AppointmentDoctor> AppointmentDoctors { get; set; }
-
     // items
     public DbSet<Item> Items { get; set; }
     public DbSet<Unit> Units { get; set; }
+    public DbSet<UnitBase> UnitBases { get; set; }
     public DbSet<CategoryItem> CategoryItems { get; set; }
     public DbSet<CategoryItemMN> CategoryItemMNs { get; set; }
     public DbSet<ItemUnit> ItemUnits { get; set; }
     public DbSet<Brand> Brands { get; set; }
-
     // movements
     public DbSet<Movement> Movements { get; set; }
     public DbSet<DetailMovement> DetailMovements { get; set; }
     public DbSet<Note> Notes { get; set; }
-
     // services
     public DbSet<Service> Services { get; set; }
     public DbSet<CategoryService> CategoryServices { get; set; }
@@ -55,6 +51,7 @@ public class RepositoryContext : DbContext
         modelBuilder.Entity<AppointmentDoctor>();
         // Items
         modelBuilder.Entity<Item>();
+        modelBuilder.Entity<UnitBase>();
         modelBuilder.Entity<Unit>().HasMany(u => u.Items).WithMany(i => i.Units).UsingEntity<ItemUnit>();
         modelBuilder.Entity<ItemUnit>();
         modelBuilder.Entity<CategoryItem>().HasMany(ci => ci.Items).WithMany(i => i.CategoryItems)
