@@ -17,4 +17,5 @@ public interface IServiceManager
     IUnitService UnitService { get; }
     ICategoryItemService CategoryItemService { get; }
     IItemService ItemService { get; }
+    IUnitBaseBaseService UnitBaseService { get; }
 }

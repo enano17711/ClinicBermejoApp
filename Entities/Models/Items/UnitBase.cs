@@ -10,5 +10,6 @@ public class UnitBase : BaseItem
     [Required(ErrorMessage = "El nombre corto es requerido")]
     [MaxLength(50, ErrorMessage = "El nombre corto no puede tener más de 50 caracteres")]
     public string? ShortName { get; set; }
+
     public ICollection<Unit>? Units { get; set; }
 }

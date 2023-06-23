@@ -5,7 +5,6 @@ using Entities.Models.Items;
 using Entities.Models.Movements;
 using Entities.Models.Services;
 using Entities.Models.Staff;
-using Shared;
 using Shared.AppointmentDoctors;
 using Shared.Appointments;
 using Shared.Brands;
@@ -20,6 +19,7 @@ using Shared.Patients;
 using Shared.ServiceDoctors;
 using Shared.Services;
 using Shared.Suppliers;
+using Shared.UnitBases;
 using Shared.Units;
 
 namespace ClinicBermejoApp;
@@ -108,5 +108,10 @@ public class MappingProfile : Profile
 
         CreateMap<ItemUnitForManipulationDto, ItemUnit>().ReverseMap();
         CreateMap<CategoryItemMNForManipulationDto, CategoryItemMN>().ReverseMap();
+
+        CreateMap<UnitBaseDto, UnitBase>().ReverseMap();
+        CreateMap<UnitBaseForCreationDto, UnitBase>().ReverseMap();
+        CreateMap<UnitBaseForUpdateDto, UnitBase>().ReverseMap();
+        CreateMap<UnitBaseForViewDto, UnitBase>().ReverseMap();
     }
 }

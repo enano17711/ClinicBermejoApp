@@ -1,5 +1,4 @@
 ﻿using Contracts;
-using Entities.Models;
 using Entities.Models.Staff;
 using Microsoft.EntityFrameworkCore;
 using Repository.Extensions;
@@ -20,11 +19,11 @@ public class DoctorRepository : RepositoryBase<Doctor>,
         var doctors = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
-            .Include(d => d.Appointments)
+            .Include(d => d.Appointments)!
             .ThenInclude(ap => ap.Patient)
-            .Include(d => d.Appointments)
+            .Include(d => d.Appointments)!
             .ThenInclude(ap => ap.Nurse)
-            .Include(d => d.ServiceDoctors)
+            .Include(d => d.ServiceDoctors)!
             .ThenInclude(sd => sd.Service)
             .Include(d => d.AppointmentDoctors)
             .Include(d => d.Patients)
@@ -36,22 +35,28 @@ public class DoctorRepository : RepositoryBase<Doctor>,
     }
 
     public async Task<Doctor?> GetDoctorByIdAsync(Guid id,
-        bool trackChanges) =>
-        await FindByCondition(d => d.Id.Equals(id),
+        bool trackChanges)
+    {
+        return await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
-            .Include(d => d.Appointments)
+            .Include(d => d.Appointments)!
             .ThenInclude(ap => ap.Patient)
-            .Include(d => d.Appointments)
+            .Include(d => d.Appointments)!
             .ThenInclude(ap => ap.Nurse)
-            .Include(d => d.ServiceDoctors)
+            .Include(d => d.ServiceDoctors)!
             .ThenInclude(sd => sd.Service)
             .Include(d => d.AppointmentDoctors)
             .Include(d => d.Patients)
             .SingleOrDefaultAsync();
+    }
 
-    public void CreateDoctor(Doctor doctor) =>
+    public void CreateDoctor(Doctor doctor)
+    {
         Create(doctor);
+    }
 
-    public void DeleteDoctor(Doctor doctor) =>
+    public void DeleteDoctor(Doctor doctor)
+    {
         Delete(doctor);
+    }
 }
