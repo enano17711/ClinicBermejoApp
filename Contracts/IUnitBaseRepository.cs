@@ -9,4 +9,5 @@ public interface IUnitBaseRepository
     void CreateUnitBase(UnitBase unitBase);
     Task<UnitBase?> GetUnitBaseByIdAsync(Guid id, bool trackChanges);
     void DeleteUnitBase(UnitBase unitBase);
+    Task<List<UnitBase>> GetAllUnitBases();
 }

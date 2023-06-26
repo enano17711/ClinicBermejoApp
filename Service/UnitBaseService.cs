@@ -59,6 +59,12 @@ public class UnitBaseService : IUnitBaseBaseService
         await _repository.SaveAsync();
     }
 
+    public async Task<IEnumerable<UnitBaseDto>> GetAllUnitBases()
+    {
+        var unitBases = await _repository.UnitBases.GetAllUnitBases();
+        return _mapper.Map<IEnumerable<UnitBaseDto>>(unitBases);
+    }
+
     private async Task<UnitBase> GetUnitBaseAndCheckIfItExists(Guid id, bool trackChanges)
     {
         var unitBase = await _repository.UnitBases.GetUnitBaseByIdAsync(id, trackChanges);

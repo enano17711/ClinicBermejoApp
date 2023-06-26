@@ -56,4 +56,12 @@ public class UnitBaseController : ControllerBase
         await _service.UnitBaseService.UpdateUnitBaseAsync(id, unitBase, true);
         return NoContent();
     }
+
+    [HttpGet("GetAllUnitBases")]
+    public async Task<IActionResult> GetUnitBases()
+    {
+        var result = await _service.UnitBaseService.GetAllUnitBases();
+
+        return Ok(result);
+    }
 }

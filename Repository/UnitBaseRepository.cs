@@ -43,4 +43,11 @@ public class UnitBaseRepository : RepositoryBase<UnitBase>, IUnitBaseRepository
     {
         Delete(unitBase);
     }
+
+    public async Task<List<UnitBase>> GetAllUnitBases()
+    {
+        return await FindAll(false)
+            .SortGeneric("Name", "asc")
+            .ToListAsync();
+    }
 }

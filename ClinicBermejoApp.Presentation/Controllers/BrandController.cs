@@ -22,7 +22,6 @@ public class BrandController : ControllerBase
     public async Task<IActionResult> GetBrands([FromQuery] BrandParameters parameters)
     {
         var pagedResult = await _service.BrandService.GetBrandsAsync(parameters, false);
-
         Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
         return Ok(pagedResult.brands);
     }

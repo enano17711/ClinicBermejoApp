@@ -12,4 +12,5 @@ public interface IUnitBaseBaseService
     Task<UnitBaseDto> CreateUnitBaseAsync(UnitBaseForCreationDto unitBase);
     Task DeleteUnitBaseAsync(Guid id, bool trackChanges);
     Task UpdateUnitBaseAsync(Guid id, UnitBaseForUpdateDto unitBase, bool trackChanges);
+    Task<IEnumerable<UnitBaseDto>> GetAllUnitBases();
 }
