@@ -5,21 +5,39 @@ namespace Shared.Orders;
 
 public abstract record OrderForManipulationDto
 {
-    [Required(ErrorMessage = "El Tipo de Movimiento es requerido")]
-    public string? Type { get; set; }
-
-    [Required(ErrorMessage = "El Monto es requerido")]
+    [Required(ErrorMessage = "El costo total de los items es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
     [Precision(18, 2)]
-    public decimal Amount { get; set; }
+    public decimal OrderTotalItemsCost { get; set; }
 
-    [Required(ErrorMessage = "La Cantidad es requerida")]
-    [Range(0, double.MaxValue, ErrorMessage = "La Cantidad debe ser positiva")]
+    [Required(ErrorMessage = "El valor de impuestos total de los items es requerido")]
+    [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
     [Precision(18, 2)]
-    public decimal Quantity { get; set; }
+    public decimal OrderTotalItemsTax { get; set; }
+
+    [Required(ErrorMessage = "El descuento total de los items es requerido")]
+    [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
+    [Precision(18, 2)]
+    public decimal OrderTotalItemsDiscount { get; set; }
+
+    [Required(ErrorMessage = "La Impuesto de la compra es requerida")]
+    [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
+    [Precision(18, 2)]
+    public decimal OrderTax { get; set; }
+
+    [Required(ErrorMessage = "El descuento de la compra es requerido")]
+    [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
+    [Precision(18, 2)]
+    public decimal OrderDiscount { get; set; }
+
+    [Required(ErrorMessage = "La Impuesto de la compra es requerida")]
+    [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
+    [Precision(18, 2)]
+    public decimal OrderCost { get; set; }
 
     [Required(ErrorMessage = "La Fecha es requerida")]
-    public DateTime? Date { get; set; }
+    public DateTime? OrderDate { get; set; }
 
+    public string? OrderNote { get; set; }
     public Guid? SupplierId { get; set; }
 }

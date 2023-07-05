@@ -19,8 +19,8 @@ public class OrderRepository : RepositoryBase<Order>,
         var orders = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
-            .Include(m => m.Supplier)
-            .Include(m => m.DetailOrders)
+            .Include(o => o.Supplier)
+            .Include(o => o.DetailOrders)
             .ToListAsync();
 
         return PagedList<Order>.ToPagedList(orders,

@@ -8,6 +8,8 @@ public abstract record ItemForManipulationDto
     [MaxLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres")]
     public string? Name { get; set; }
 
+    public string? Code { get; init; }
+
     [MaxLength(500, ErrorMessage = "La descripción no puede tener más de 500 caracteres")]
     public string? Description { get; set; }
 

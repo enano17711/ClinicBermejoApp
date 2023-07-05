@@ -3,17 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Entities.Models.Items;
 using Microsoft.EntityFrameworkCore;
 
-namespace Entities.Models.Orders;
+namespace Entities.Models.Sales;
 
 /// <summary>
-///     Represents a detail order item.
+///     Represents a detail sale.
 /// </summary>
-public class DetailOrder
+public class DetailSale
 {
     /// <summary>
-    ///     Gets or sets the ID of the detail order.
+    ///     Gets or sets the ID of the detail sale.
     /// </summary>
-    [Column("DetailOrderId")]
+    [Column("DetailSaleId")]
     public Guid Id { get; set; }
 
     /// <summary>
@@ -22,7 +22,7 @@ public class DetailOrder
     [Required(ErrorMessage = "El Costo del item es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
     [Precision(18, 2)]
-    public decimal DetailOrderItemCost { get; set; }
+    public decimal DetailSaleItemCost { get; set; }
 
     /// <summary>
     ///     Gets or sets the tax amount for the item.
@@ -30,7 +30,7 @@ public class DetailOrder
     [Required(ErrorMessage = "El Impuesto del item es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
     [Precision(18, 2)]
-    public decimal DetailOrderItemTax { get; set; }
+    public decimal DetailSaleItemTax { get; set; }
 
     /// <summary>
     ///     Gets or sets the discount amount for the item.
@@ -38,7 +38,7 @@ public class DetailOrder
     [Required(ErrorMessage = "El Descuento del item es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
     [Precision(18, 2)]
-    public decimal DetailOrderItemDiscount { get; set; }
+    public decimal DetailSaleItemDiscount { get; set; }
 
     /// <summary>
     ///     Gets or sets the total amount for the item.
@@ -46,27 +46,27 @@ public class DetailOrder
     [Required(ErrorMessage = "El Total del item es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
     [Precision(18, 2)]
-    public decimal DetailOrderItemTotal { get; set; }
+    public decimal DetailSaleItemTotal { get; set; }
 
     /// <summary>
     ///     Gets or sets the quantity of the item.
     /// </summary>
     [Required(ErrorMessage = "La Cantidad es requerida")]
     [Range(0, uint.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
-    public uint DetailOrderItemQuantity { get; set; }
+    public uint DetailSaleItemQuantity { get; set; }
 
     /// <summary>
     ///     Gets or sets the number of single units for the item.
     /// </summary>
     [Required(ErrorMessage = "Las unidades sueltas son requeridas")]
     [Range(0, uint.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
-    public uint DetailOrderItemSingleUnits { get; set; }
+    public uint DetailSaleItemSingleUnits { get; set; }
 
     /// <summary>
     ///     Gets or sets the date of the item.
     /// </summary>
     [Required(ErrorMessage = "La Fecha es requerida")]
-    public DateTime DetailOrderItemDate { get; set; }
+    public DateTime DetailSaleItemDate { get; set; }
 
     /// <summary>
     ///     Gets or sets the allotment of the item.
@@ -77,7 +77,7 @@ public class DetailOrder
     ///     Gets or sets the expiration date of the item.
     /// </summary>
     [Required(ErrorMessage = "La fecha de expiracion es requerida")]
-    public DateTime DetailOrderItemExpiration { get; set; }
+    public DateTime DetailSaleItemExpiration { get; set; }
 
     /// <summary>
     ///     Gets or sets the ID of the associated item.
@@ -102,13 +102,13 @@ public class DetailOrder
     public Unit? Unit { get; set; }
 
     /// <summary>
-    ///     Gets or sets the ID of the associated order.
+    ///     Gets or sets the ID of the associated sale.
     /// </summary>
-    [ForeignKey(nameof(Order))]
-    public Guid? OrderId { get; set; }
+    [ForeignKey(nameof(Sale))]
+    public Guid? SaleId { get; set; }
 
     /// <summary>
-    ///     Gets or sets the associated order.
+    ///     Gets or sets the associated sale.
     /// </summary>
-    public Order? Order { get; set; }
+    public Sale? Sale { get; set; }
 }
