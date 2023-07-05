@@ -200,10 +200,10 @@ namespace ClinicBermejoApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movements",
+                name: "Orders",
                 columns: table => new
                 {
-                    MovementId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Quantity = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
@@ -212,9 +212,9 @@ namespace ClinicBermejoApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movements", x => x.MovementId);
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
-                        name: "FK_Movements_Suppliers_SupplierId",
+                        name: "FK_Orders_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "SupplierId");
@@ -252,31 +252,31 @@ namespace ClinicBermejoApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DetailMovements",
+                name: "DetailOrders",
                 columns: table => new
                 {
-                    DetailMovementId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DetailOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Quantity = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Allotment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsAllotment = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    MovementId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DetailMovements", x => x.DetailMovementId);
+                    table.PrimaryKey("PK_DetailOrders", x => x.DetailOrderId);
                     table.ForeignKey(
-                        name: "FK_DetailMovements_Items_ItemId",
+                        name: "FK_DetailOrders_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "ItemId");
                     table.ForeignKey(
-                        name: "FK_DetailMovements_Movements_MovementId",
-                        column: x => x.MovementId,
-                        principalTable: "Movements",
-                        principalColumn: "MovementId");
+                        name: "FK_DetailOrders_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -305,14 +305,14 @@ namespace ClinicBermejoApp.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetailMovements_ItemId",
-                table: "DetailMovements",
+                name: "IX_DetailOrders_ItemId",
+                table: "DetailOrders",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetailMovements_MovementId",
-                table: "DetailMovements",
-                column: "MovementId");
+                name: "IX_DetailOrders_OrderId",
+                table: "DetailOrders",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_BrandId",
@@ -330,8 +330,8 @@ namespace ClinicBermejoApp.Migrations
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movements_SupplierId",
-                table: "Movements",
+                name: "IX_Orders_SupplierId",
+                table: "Orders",
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
@@ -377,7 +377,7 @@ namespace ClinicBermejoApp.Migrations
                 name: "CategoryServices");
 
             migrationBuilder.DropTable(
-                name: "DetailMovements");
+                name: "DetailOrders");
 
             migrationBuilder.DropTable(
                 name: "ServiceDoctors");
@@ -389,7 +389,7 @@ namespace ClinicBermejoApp.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Movements");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Services");

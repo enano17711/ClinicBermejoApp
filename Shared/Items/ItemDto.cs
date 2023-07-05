@@ -1,6 +1,5 @@
 ﻿using Shared.Brands;
 using Shared.CategoryItem;
-using Shared.DetailMovements;
 using Shared.Units;
 
 namespace Shared.Items;

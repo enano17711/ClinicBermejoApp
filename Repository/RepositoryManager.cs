@@ -10,12 +10,12 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<ICategoryItemMNRepository> _categoryItemMNRepository;
     private readonly Lazy<ICategoryItemRepository> _categoryItemRepository;
     private readonly Lazy<ICategoryServiceRepository> _categoryServiceRepository;
-    private readonly Lazy<IDetailMovementRepository> _detailMovementRepository;
+    private readonly Lazy<IDetailOrderRepository> _detailOrderRepository;
     private readonly Lazy<IDoctorRepository> _doctorRepository;
     private readonly Lazy<IItemRepository> _itemRepository;
     private readonly Lazy<IItemUnitRepository> _itemUnitRepository;
-    private readonly Lazy<IMovementRepository> _movementRepository;
     private readonly Lazy<INurseRepository> _nurseRepository;
+    private readonly Lazy<IOrderRepository> _orderRepository;
     private readonly Lazy<IPatientRepository> _patientRepository;
     private readonly RepositoryContext _repositoryContext;
     private readonly Lazy<IServiceDoctorRepository> _serviceDoctorRepository;
@@ -40,9 +40,9 @@ public class RepositoryManager : IRepositoryManager
         _appointmentRepository = new Lazy<IAppointmentRepository>(() => new AppointmentRepository(_repositoryContext));
         _appointmentDoctorRepository =
             new Lazy<IAppointmentDoctorRepository>(() => new AppointmentDoctorRepository(_repositoryContext));
-        _movementRepository = new Lazy<IMovementRepository>(() => new MovementRepository(_repositoryContext));
-        _detailMovementRepository =
-            new Lazy<IDetailMovementRepository>(() => new DetailMovementRepository(_repositoryContext));
+        _orderRepository = new Lazy<IOrderRepository>(() => new OrderRepository(_repositoryContext));
+        _detailOrderRepository =
+            new Lazy<IDetailOrderRepository>(() => new DetailOrderRepository(_repositoryContext));
         _brandRepository = new Lazy<IBrandRepository>(() => new BrandRepository(_repositoryContext));
         _unitRepository = new Lazy<IUnitRepository>(() => new UnitRepository(_repositoryContext));
         _categoryItemRepository =
@@ -63,8 +63,8 @@ public class RepositoryManager : IRepositoryManager
     public IServiceDoctorRepository ServiceDoctors => _serviceDoctorRepository.Value;
     public IAppointmentRepository Appointments => _appointmentRepository.Value;
     public IAppointmentDoctorRepository AppointmentDoctors => _appointmentDoctorRepository.Value;
-    public IMovementRepository Movements => _movementRepository.Value;
-    public IDetailMovementRepository DetailMovements => _detailMovementRepository.Value;
+    public IOrderRepository Orders => _orderRepository.Value;
+    public IDetailOrderRepository DetailOrders => _detailOrderRepository.Value;
     public IBrandRepository Brands => _brandRepository.Value;
     public IUnitRepository Units => _unitRepository.Value;
     public ICategoryItemRepository CategoryItems => _categoryItemRepository.Value;

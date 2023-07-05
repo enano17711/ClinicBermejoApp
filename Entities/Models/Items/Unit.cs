@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Entities.Models.Movements;
+using Entities.Models.Orders;
 
 namespace Entities.Models.Items;
 
@@ -23,5 +23,5 @@ public class Unit : BaseItem
     public UnitBase? UnitBase { get; set; }
     public ICollection<Item>? Items { get; set; }
     public ICollection<ItemUnit>? ItemUnits { get; set; }
-    public ICollection<DetailMovement>? DetailMovements { get; set; }
+    public ICollection<DetailOrder>? DetailOrders { get; set; }
 }

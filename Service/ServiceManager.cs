@@ -11,11 +11,11 @@ public class ServiceManager : IServiceManager
     private readonly Lazy<IBrandService> _brandService;
     private readonly Lazy<ICategoryItemService> _categoryItemService;
     private readonly Lazy<ICategoryServiceService> _categoryServiceService;
-    private readonly Lazy<IDetailMovementService> _detailMovementService;
+    private readonly Lazy<IDetailOrderService> _detailOrderService;
     private readonly Lazy<IDoctorService> _doctorService;
     private readonly Lazy<IItemService> _itemService;
-    private readonly Lazy<IMovementService> _movementService;
     private readonly Lazy<INurseService> _nurseService;
+    private readonly Lazy<IOrderService> _orderService;
     private readonly Lazy<IPatientService> _patientService;
     private readonly Lazy<IServiceDoctorService> _serviceDoctorService;
     private readonly Lazy<IServiceService> _serviceService;
@@ -37,9 +37,9 @@ public class ServiceManager : IServiceManager
         _appointmentService = new Lazy<IAppointmentService>(() => new AppointmentService(repository, mapper, logger));
         _appointmentDoctorService =
             new Lazy<IAppointmentDoctorService>(() => new AppointmentDoctorService(repository, mapper, logger));
-        _movementService = new Lazy<IMovementService>(() => new MovementService(repository, mapper, logger));
-        _detailMovementService =
-            new Lazy<IDetailMovementService>(() => new DetailMovementService(repository, mapper, logger));
+        _orderService = new Lazy<IOrderService>(() => new OrderService(repository, mapper, logger));
+        _detailOrderService =
+            new Lazy<IDetailOrderService>(() => new DetailOrderService(repository, mapper, logger));
         _brandService = new Lazy<IBrandService>(() => new BrandService(repository, mapper, logger));
         _unitService = new Lazy<IUnitService>(() => new UnitService(repository, mapper, logger));
         _categoryItemService =
@@ -57,8 +57,8 @@ public class ServiceManager : IServiceManager
     public IServiceDoctorService ServiceDoctorService => _serviceDoctorService.Value;
     public IAppointmentService AppointmentService => _appointmentService.Value;
     public IAppointmentDoctorService AppointmentDoctorService => _appointmentDoctorService.Value;
-    public IMovementService MovementService => _movementService.Value;
-    public IDetailMovementService DetailMovementService => _detailMovementService.Value;
+    public IOrderService OrderService => _orderService.Value;
+    public IDetailOrderService DetailOrderService => _detailOrderService.Value;
     public IBrandService BrandService => _brandService.Value;
     public IUnitService UnitService => _unitService.Value;
     public ICategoryItemService CategoryItemService => _categoryItemService.Value;

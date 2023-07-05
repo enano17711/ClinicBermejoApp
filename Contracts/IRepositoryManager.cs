@@ -22,10 +22,10 @@ public interface IRepositoryManager
 
     IAppointmentDoctorRepository AppointmentDoctors { get; }
 
-    // movements
-    IMovementRepository Movements { get; }
+    // Orders
+    IOrderRepository Orders { get; }
 
-    IDetailMovementRepository DetailMovements { get; }
+    IDetailOrderRepository DetailOrders { get; }
 
     // items
     IBrandRepository Brands { get; }

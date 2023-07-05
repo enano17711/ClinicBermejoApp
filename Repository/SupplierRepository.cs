@@ -19,7 +19,7 @@ public class SupplierRepository : RepositoryBase<Supplier>,
         var suppliers = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
-            .Include(s => s.Movements)
+            .Include(s => s.Orders)
             .ToListAsync();
 
         return PagedList<Supplier>.ToPagedList(suppliers,
@@ -28,15 +28,21 @@ public class SupplierRepository : RepositoryBase<Supplier>,
     }
 
     public async Task<Supplier?> GetSupplierByIdAsync(Guid id,
-        bool trackChanges) =>
-        await FindByCondition(d => d.Id.Equals(id),
+        bool trackChanges)
+    {
+        return await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
-            .Include(s => s.Movements)
+            .Include(s => s.Orders)
             .SingleOrDefaultAsync();
+    }
 
-    public void CreateSupplier(Supplier supplier) =>
+    public void CreateSupplier(Supplier supplier)
+    {
         Create(supplier);
+    }
 
-    public void DeleteSupplier(Supplier supplier) =>
+    public void DeleteSupplier(Supplier supplier)
+    {
         Delete(supplier);
+    }
 }

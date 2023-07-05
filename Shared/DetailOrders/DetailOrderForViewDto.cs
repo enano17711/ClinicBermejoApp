@@ -1,9 +1,6 @@
-﻿using Shared.Items;
-using Shared.Movements;
+﻿namespace Shared.DetailOrders;
 
-namespace Shared.DetailMovements;
-
-public record DetailMovementDto
+public record DetailOrderForViewDto
 {
     public Guid Id { get; set; }
 
@@ -16,8 +13,4 @@ public record DetailMovementDto
     public string? Allotment { get; set; }
 
     public char IsAllotment { get; set; }
-
-    public MovementForViewDto? Movement { get; set; }
-
-    public ItemForViewDto? Item { get; set; }
 }

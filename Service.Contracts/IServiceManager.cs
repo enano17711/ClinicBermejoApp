@@ -11,8 +11,8 @@ public interface IServiceManager
     IServiceDoctorService ServiceDoctorService { get; }
     IAppointmentService AppointmentService { get; }
     IAppointmentDoctorService AppointmentDoctorService { get; }
-    IMovementService MovementService { get; }
-    IDetailMovementService DetailMovementService { get; }
+    IOrderService OrderService { get; }
+    IDetailOrderService DetailOrderService { get; }
     IBrandService BrandService { get; }
     IUnitService UnitService { get; }
     ICategoryItemService CategoryItemService { get; }

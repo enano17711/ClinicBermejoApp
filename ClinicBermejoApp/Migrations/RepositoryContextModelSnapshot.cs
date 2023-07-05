@@ -247,7 +247,7 @@ namespace ClinicBermejoApp.Migrations
                     b.ToTable("UnitBases");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
+            modelBuilder.Entity("Entities.Models.OrderetailOrder", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -712,7 +712,7 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("UnitBase");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
+            modelBuilder.Entity("Entities.Models.Movements.DetailOrder", b =>
                 {
                     b.HasOne("Entities.Models.Items.Item", "Item")
                         .WithMany("DetailMovements")

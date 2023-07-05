@@ -1,7 +1,7 @@
 ﻿using Entities.Models;
 using Entities.Models.Appointments;
 using Entities.Models.Items;
-using Entities.Models.Movements;
+using Entities.Models.Orders;
 using Entities.Models.Services;
 using Entities.Models.Staff;
 using Microsoft.EntityFrameworkCore;
@@ -38,9 +38,9 @@ public class RepositoryContext : DbContext
 
     public DbSet<Brand> Brands { get; set; }
 
-    // movements
-    public DbSet<Movement> Movements { get; set; }
-    public DbSet<DetailMovement> DetailMovements { get; set; }
+    // orders
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<DetailOrder> DetailOrders { get; set; }
 
     public DbSet<Note> Notes { get; set; }
 
@@ -68,9 +68,9 @@ public class RepositoryContext : DbContext
             .UsingEntity<CategoryItemMN>();
         modelBuilder.Entity<CategoryItemMN>();
         modelBuilder.Entity<Brand>();
-        // Movements
-        modelBuilder.Entity<Movement>();
-        modelBuilder.Entity<DetailMovement>();
+        // Orders
+        modelBuilder.Entity<Order>();
+        modelBuilder.Entity<DetailOrder>();
         modelBuilder.Entity<Note>();
         // Services
         modelBuilder.Entity<Service>();

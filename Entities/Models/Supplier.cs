@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Entities.Models.Movements;
+using Entities.Models.Orders;
 
 namespace Entities.Models;
 
@@ -11,5 +11,5 @@ public class Supplier : BasePerson
     [MaxLength(50, ErrorMessage = "El nit no puede tener más de 50 caracteres")]
     public string? Nit { get; set; }
 
-    public ICollection<Movement>? Movements { get; set; }
+    public ICollection<Order>? Orders { get; set; }
 }

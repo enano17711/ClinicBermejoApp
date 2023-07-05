@@ -21,11 +21,11 @@ namespace ClinicBermejoApp.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Amount",
-                table: "Movements");
+                table: "Orders");
 
             migrationBuilder.DropColumn(
                 name: "Type",
-                table: "Movements");
+                table: "Orders");
 
             migrationBuilder.DropColumn(
                 name: "UnitId",
@@ -33,30 +33,30 @@ namespace ClinicBermejoApp.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "Quantity",
-                table: "Movements",
+                table: "Orders",
                 newName: "TotalCost");
 
             migrationBuilder.RenameColumn(
                 name: "Amount",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 newName: "Cost");
 
             migrationBuilder.AddColumn<Guid>(
                 name: "NoteId",
-                table: "Movements",
+                table: "Orders",
                 type: "uniqueidentifier",
                 nullable: true);
 
             migrationBuilder.AddColumn<long>(
                 name: "TotalQuantity",
-                table: "Movements",
+                table: "Orders",
                 type: "bigint",
                 nullable: false,
                 defaultValue: 0L);
 
             migrationBuilder.AlterColumn<long>(
                 name: "Quantity",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 type: "bigint",
                 nullable: false,
                 oldClrType: typeof(decimal),
@@ -66,7 +66,7 @@ namespace ClinicBermejoApp.Migrations
 
             migrationBuilder.AlterColumn<bool>(
                 name: "IsAllotment",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 type: "bit",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -74,14 +74,14 @@ namespace ClinicBermejoApp.Migrations
 
             migrationBuilder.AddColumn<long>(
                 name: "SingleUnits",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 type: "bigint",
                 nullable: false,
                 defaultValue: 0L);
 
             migrationBuilder.AddColumn<Guid>(
                 name: "UnitId",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 type: "uniqueidentifier",
                 nullable: true);
 
@@ -123,13 +123,13 @@ namespace ClinicBermejoApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movements_NoteId",
-                table: "Movements",
+                name: "IX_Orders_NoteId",
+                table: "Orders",
                 column: "NoteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetailMovements_UnitId",
-                table: "DetailMovements",
+                name: "IX_DetailOrders_UnitId",
+                table: "DetailOrders",
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
@@ -143,15 +143,15 @@ namespace ClinicBermejoApp.Migrations
                 column: "UnitId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_DetailMovements_Units_UnitId",
-                table: "DetailMovements",
+                name: "FK_DetailOrders_Units_UnitId",
+                table: "DetailOrders",
                 column: "UnitId",
                 principalTable: "Units",
                 principalColumn: "UnitId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Movements_Note_NoteId",
-                table: "Movements",
+                name: "FK_Orders_Note_NoteId",
+                table: "Orders",
                 column: "NoteId",
                 principalTable: "Note",
                 principalColumn: "NoteId");
@@ -161,12 +161,12 @@ namespace ClinicBermejoApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_DetailMovements_Units_UnitId",
-                table: "DetailMovements");
+                name: "FK_DetailOrders_Units_UnitId",
+                table: "DetailOrders");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Movements_Note_NoteId",
-                table: "Movements");
+                name: "FK_Orders_Note_NoteId",
+                table: "Orders");
 
             migrationBuilder.DropTable(
                 name: "ItemUnit");
@@ -175,42 +175,42 @@ namespace ClinicBermejoApp.Migrations
                 name: "Note");
 
             migrationBuilder.DropIndex(
-                name: "IX_Movements_NoteId",
-                table: "Movements");
+                name: "IX_Orders_NoteId",
+                table: "Orders");
 
             migrationBuilder.DropIndex(
-                name: "IX_DetailMovements_UnitId",
-                table: "DetailMovements");
+                name: "IX_DetailOrders_UnitId",
+                table: "DetailOrders");
 
             migrationBuilder.DropColumn(
                 name: "NoteId",
-                table: "Movements");
+                table: "Orders");
 
             migrationBuilder.DropColumn(
                 name: "TotalQuantity",
-                table: "Movements");
+                table: "Orders");
 
             migrationBuilder.DropColumn(
                 name: "SingleUnits",
-                table: "DetailMovements");
+                table: "DetailOrders");
 
             migrationBuilder.DropColumn(
                 name: "UnitId",
-                table: "DetailMovements");
+                table: "DetailOrders");
 
             migrationBuilder.RenameColumn(
                 name: "TotalCost",
-                table: "Movements",
+                table: "Orders",
                 newName: "Quantity");
 
             migrationBuilder.RenameColumn(
                 name: "Cost",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 newName: "Amount");
 
             migrationBuilder.AddColumn<decimal>(
                 name: "Amount",
-                table: "Movements",
+                table: "Orders",
                 type: "decimal(18,2)",
                 precision: 18,
                 scale: 2,
@@ -219,7 +219,7 @@ namespace ClinicBermejoApp.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "Type",
-                table: "Movements",
+                table: "Orders",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -232,7 +232,7 @@ namespace ClinicBermejoApp.Migrations
 
             migrationBuilder.AlterColumn<decimal>(
                 name: "Quantity",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 type: "decimal(18,2)",
                 precision: 18,
                 scale: 2,
@@ -242,7 +242,7 @@ namespace ClinicBermejoApp.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "IsAllotment",
-                table: "DetailMovements",
+                table: "DetailOrders",
                 type: "nvarchar(1)",
                 nullable: false,
                 oldClrType: typeof(bool),

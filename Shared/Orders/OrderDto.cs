@@ -1,9 +1,9 @@
-﻿using Shared.DetailMovements;
+﻿using Shared.DetailOrders;
 using Shared.Suppliers;
 
-namespace Shared.Movements;
+namespace Shared.Orders;
 
-public record MovementDto
+public record OrderDto
 {
     public Guid Id { get; set; }
     public string? Type { get; set; }
@@ -11,5 +11,5 @@ public record MovementDto
     public decimal Quantity { get; set; }
     public DateTime? Date { get; set; }
     public SupplierForViewDto? Supplier { get; set; }
-    public ICollection<DetailMovementForViewDto>? DetailMovements { get; set; }
+    public ICollection<DetailOrderForViewDto>? DetailOrders { get; set; }
 }

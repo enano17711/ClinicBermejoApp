@@ -1,6 +1,6 @@
-﻿namespace Shared.Movements;
+﻿namespace Shared.Orders;
 
-public record MovementForViewDto
+public record OrderForViewDto
 {
     public Guid Id { get; set; }
     public string? Type { get; set; }

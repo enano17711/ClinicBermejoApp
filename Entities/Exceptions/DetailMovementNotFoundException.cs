@@ -1,8 +1,8 @@
 ﻿namespace Entities.Exceptions;
 
-public class DetailMovementNotFoundException : NotFoundException
+public class DetailOrderNotFoundException : NotFoundException
 {
-    public DetailMovementNotFoundException(Guid id) : base($"DetailMovement with id: {id} not found.")
+    public DetailOrderNotFoundException(Guid id) : base($"DetailOrder with id: {id} not found.")
     {
     }
 }

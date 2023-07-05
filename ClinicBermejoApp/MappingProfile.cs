@@ -2,7 +2,7 @@
 using Entities.Models;
 using Entities.Models.Appointments;
 using Entities.Models.Items;
-using Entities.Models.Movements;
+using Entities.Models.Orders;
 using Entities.Models.Services;
 using Entities.Models.Staff;
 using Shared.AppointmentDoctors;
@@ -10,11 +10,11 @@ using Shared.Appointments;
 using Shared.Brands;
 using Shared.CategoryItem;
 using Shared.CategoryService;
-using Shared.DetailMovements;
+using Shared.DetailOrders;
 using Shared.Doctors;
 using Shared.Items;
-using Shared.Movements;
 using Shared.Nurses;
+using Shared.Orders;
 using Shared.Patients;
 using Shared.ServiceDoctors;
 using Shared.Services;
@@ -76,15 +76,15 @@ public class MappingProfile : Profile
         CreateMap<AppointmentDoctorForViewDto, AppointmentDoctor>().ReverseMap();
         CreateMap<AppointmentDoctorForDoctorViewDto, AppointmentDoctor>().ReverseMap();
 
-        CreateMap<MovementDto, Movement>().ReverseMap();
-        CreateMap<MovementForCreationDto, Movement>().ReverseMap();
-        CreateMap<MovementForUpdateDto, Movement>().ReverseMap();
-        CreateMap<MovementForViewDto, Movement>().ReverseMap();
+        CreateMap<OrderDto, Order>().ReverseMap();
+        CreateMap<OrderForCreationDto, Order>().ReverseMap();
+        CreateMap<OrderForUpdateDto, Order>().ReverseMap();
+        CreateMap<OrderForViewDto, Order>().ReverseMap();
 
-        CreateMap<DetailMovementDto, DetailMovement>().ReverseMap();
-        CreateMap<DetailMovementForCreationDto, DetailMovement>().ReverseMap();
-        CreateMap<DetailMovementForUpdateDto, DetailMovement>().ReverseMap();
-        CreateMap<DetailMovementForViewDto, DetailMovement>().ReverseMap();
+        CreateMap<DetailOrderDto, DetailOrder>().ReverseMap();
+        CreateMap<DetailOrderForCreationDto, DetailOrder>().ReverseMap();
+        CreateMap<DetailOrderForUpdateDto, DetailOrder>().ReverseMap();
+        CreateMap<DetailOrderForViewDto, DetailOrder>().ReverseMap();
 
         CreateMap<BrandDto, Brand>().ReverseMap();
         CreateMap<BrandForViewDto, Brand>().ReverseMap();

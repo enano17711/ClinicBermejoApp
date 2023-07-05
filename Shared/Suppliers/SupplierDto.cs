@@ -1,4 +1,4 @@
-﻿using Shared.Movements;
+﻿using Shared.Orders;
 
 namespace Shared.Suppliers;
 
@@ -13,5 +13,5 @@ public record SupplierDto
     public DateTime? Date { get; set; }
     public string? Address { get; set; }
     public string? Nit { get; set; }
-    public IEnumerable<MovementForViewDto>? Movements { get; set; }
+    public IEnumerable<OrderForViewDto>? Orders { get; set; }
 }

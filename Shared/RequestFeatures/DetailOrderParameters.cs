@@ -1,6 +1,6 @@
 ﻿namespace Shared.RequestFeatures;
 
-public class MovementParameters : RequestParameters
+public class DetailOrderParameters : RequestParameters
 {
     public string? SearchColumn { get; set; }
     public string? SearchTerm { get; set; }

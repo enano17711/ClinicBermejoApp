@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Shared.Movements;
+namespace Shared.Orders;
 
-public abstract record MovementForManipulationDto
+public abstract record OrderForManipulationDto
 {
     [Required(ErrorMessage = "El Tipo de Movimiento es requerido")]
     public string? Type { get; set; }

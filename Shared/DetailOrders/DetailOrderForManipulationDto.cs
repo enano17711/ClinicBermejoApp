@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Shared.DetailMovements;
+namespace Shared.DetailOrders;
 
-public abstract record DetailMovementForManipulationDto
+public abstract record DetailOrderForManipulationDto
 {
     [Required(ErrorMessage = "El Monto es requerido")]
     [Range(0, double.MaxValue, ErrorMessage = "El Monto debe ser positivo")]
@@ -23,7 +23,7 @@ public abstract record DetailMovementForManipulationDto
     [Required(ErrorMessage = "El tipo de Vencimiento es requerido")]
     public char IsAllotment { get; set; }
 
-    public Guid? MovementId { get; set; }
+    public Guid? OrderId { get; set; }
 
     public Guid? ItemId { get; set; }
 }

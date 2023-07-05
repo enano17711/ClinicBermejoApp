@@ -195,12 +195,12 @@ namespace ClinicBermejoApp.Migrations
                     b.ToTable("Units");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
+            modelBuilder.Entity("Entities.Models.Orders.DetailOrder", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DetailMovementId");
+                        .HasColumnName("DetailOrderId");
 
                     b.Property<string>("Allotment")
                         .HasColumnType("nvarchar(max)");
@@ -219,7 +219,7 @@ namespace ClinicBermejoApp.Migrations
                     b.Property<Guid?>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("MovementId")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("Quantity")
@@ -235,19 +235,19 @@ namespace ClinicBermejoApp.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.HasIndex("MovementId");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("DetailMovements");
+                    b.ToTable("DetailOrders");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.Movement", b =>
+            modelBuilder.Entity("Entities.Models.Orders.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("MovementId");
+                        .HasColumnName("OrderId");
 
                     b.Property<DateTime?>("Date")
                         .IsRequired()
@@ -272,10 +272,10 @@ namespace ClinicBermejoApp.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Movements");
+                    b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.Note", b =>
+            modelBuilder.Entity("Entities.Models.Orders.Note", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -634,35 +634,35 @@ namespace ClinicBermejoApp.Migrations
                     b.Navigation("Unit");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.DetailMovement", b =>
+            modelBuilder.Entity("Entities.Models.Orders.DetailOrder", b =>
                 {
                     b.HasOne("Entities.Models.Items.Item", "Item")
-                        .WithMany("DetailMovements")
+                        .WithMany("DetailOrders")
                         .HasForeignKey("ItemId");
 
-                    b.HasOne("Entities.Models.Movements.Movement", "Movement")
-                        .WithMany("DetailMovements")
-                        .HasForeignKey("MovementId");
+                    b.HasOne("Entities.Models.Orders.Order", "Order")
+                        .WithMany("DetailOrders")
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("Entities.Models.Items.Unit", "Unit")
-                        .WithMany("DetailMovements")
+                        .WithMany("DetailOrders")
                         .HasForeignKey("UnitId");
 
                     b.Navigation("Item");
 
-                    b.Navigation("Movement");
+                    b.Navigation("Order");
 
                     b.Navigation("Unit");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.Movement", b =>
+            modelBuilder.Entity("Entities.Models.Orders.Order", b =>
                 {
-                    b.HasOne("Entities.Models.Movements.Note", "Note")
-                        .WithMany("Movements")
+                    b.HasOne("Entities.Models.Orders.Note", "Note")
+                        .WithMany("Orders")
                         .HasForeignKey("NoteId");
 
                     b.HasOne("Entities.Models.Supplier", "Supplier")
-                        .WithMany("Movements")
+                        .WithMany("Orders")
                         .HasForeignKey("SupplierId");
 
                     b.Navigation("Note");
@@ -726,26 +726,26 @@ namespace ClinicBermejoApp.Migrations
 
             modelBuilder.Entity("Entities.Models.Items.Item", b =>
                 {
-                    b.Navigation("DetailMovements");
+                    b.Navigation("DetailOrders");
 
                     b.Navigation("ItemUnits");
                 });
 
             modelBuilder.Entity("Entities.Models.Items.Unit", b =>
                 {
-                    b.Navigation("DetailMovements");
+                    b.Navigation("DetailOrders");
 
                     b.Navigation("ItemUnits");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.Movement", b =>
+            modelBuilder.Entity("Entities.Models.Orders.Order", b =>
                 {
-                    b.Navigation("DetailMovements");
+                    b.Navigation("DetailOrders");
                 });
 
-            modelBuilder.Entity("Entities.Models.Movements.Note", b =>
+            modelBuilder.Entity("Entities.Models.Orders.Note", b =>
                 {
-                    b.Navigation("Movements");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Entities.Models.Patient", b =>
@@ -783,7 +783,7 @@ namespace ClinicBermejoApp.Migrations
 
             modelBuilder.Entity("Entities.Models.Supplier", b =>
                 {
-                    b.Navigation("Movements");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
