@@ -5,6 +5,7 @@ public interface IRepositoryManager
     ISupplierRepository Suppliers { get; }
 
     IPatientRepository Patients { get; }
+    ICustomerRepository Customers { get; }
 
     // staff
     INurseRepository Nurses { get; }
@@ -26,6 +27,10 @@ public interface IRepositoryManager
     IOrderRepository Orders { get; }
 
     IDetailOrderRepository DetailOrders { get; }
+
+    // sales
+    ISaleRepository Sales { get; }
+    IDetailSaleRepository DetailSales { get; }
 
     // items
     IBrandRepository Brands { get; }

@@ -10,7 +10,9 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<ICategoryItemMNRepository> _categoryItemMNRepository;
     private readonly Lazy<ICategoryItemRepository> _categoryItemRepository;
     private readonly Lazy<ICategoryServiceRepository> _categoryServiceRepository;
+    private readonly Lazy<ICustomerRepository> _customerRepository;
     private readonly Lazy<IDetailOrderRepository> _detailOrderRepository;
+    private readonly Lazy<IDetailSaleRepository> _detailSaleRepository;
     private readonly Lazy<IDoctorRepository> _doctorRepository;
     private readonly Lazy<IItemRepository> _itemRepository;
     private readonly Lazy<IItemUnitRepository> _itemUnitRepository;
@@ -18,12 +20,12 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<IOrderRepository> _orderRepository;
     private readonly Lazy<IPatientRepository> _patientRepository;
     private readonly RepositoryContext _repositoryContext;
+    private readonly Lazy<ISaleRepository> _saleRepository;
     private readonly Lazy<IServiceDoctorRepository> _serviceDoctorRepository;
     private readonly Lazy<IServiceRepository> _serviceRepository;
     private readonly Lazy<ISupplierRepository> _supplierRepository;
     private readonly Lazy<IUnitBaseRepository> _unitBaseRepository;
     private readonly Lazy<IUnitRepository> _unitRepository;
-
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -52,6 +54,9 @@ public class RepositoryManager : IRepositoryManager
         _categoryItemMNRepository = new Lazy<ICategoryItemMNRepository>(() =>
             new CategoryItemMNRepository(_repositoryContext));
         _unitBaseRepository = new Lazy<IUnitBaseRepository>(() => new UnitBaseRepository(_repositoryContext));
+        _saleRepository = new Lazy<ISaleRepository>(() => new SaleRepository(_repositoryContext));
+        _detailSaleRepository = new Lazy<IDetailSaleRepository>(() => new DetailSaleRepository(_repositoryContext));
+        _customerRepository = new Lazy<ICustomerRepository>(() => new CustomerRepository(_repositoryContext));
     }
 
     public IDoctorRepository Doctors => _doctorRepository.Value;
@@ -72,6 +77,9 @@ public class RepositoryManager : IRepositoryManager
     public IItemUnitRepository ItemUnits => _itemUnitRepository.Value;
     public ICategoryItemMNRepository CategoryItemMNs => _categoryItemMNRepository.Value;
     public IUnitBaseRepository UnitBases => _unitBaseRepository.Value;
+    public ISaleRepository Sales => _saleRepository.Value;
+    public IDetailSaleRepository DetailSales => _detailSaleRepository.Value;
+    public ICustomerRepository Customers => _customerRepository.Value;
 
     public Task SaveAsync()
     {

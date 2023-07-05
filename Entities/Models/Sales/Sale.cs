@@ -88,5 +88,5 @@ public class Sale
     /// <summary>
     ///     Gets or sets the collection of detail sales associated with the sale.
     /// </summary>
-    public ICollection<DetailSale>? DetailOrders { get; set; }
+    public ICollection<DetailSale>? DetailSales { get; set; }
 }
