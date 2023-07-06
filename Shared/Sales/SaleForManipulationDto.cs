@@ -40,4 +40,5 @@ public abstract record SaleForManipulationDto
 
     public string? SaleNote { get; set; }
     public Guid? CustomerId { get; set; }
+    public Guid? NoteId { get; set; }
 }

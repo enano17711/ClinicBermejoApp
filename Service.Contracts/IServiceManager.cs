@@ -18,4 +18,6 @@ public interface IServiceManager
     ICategoryItemService CategoryItemService { get; }
     IItemService ItemService { get; }
     IUnitBaseBaseService UnitBaseService { get; }
+    INoteService NoteService { get; }
+    ICustomerService CustomerService { get; }
 }

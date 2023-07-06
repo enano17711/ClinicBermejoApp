@@ -3,6 +3,7 @@ using Entities.Models;
 using Entities.Models.Appointments;
 using Entities.Models.Items;
 using Entities.Models.Orders;
+using Entities.Models.Sales;
 using Entities.Models.Services;
 using Entities.Models.Staff;
 using Shared.AppointmentDoctors;
@@ -10,12 +11,16 @@ using Shared.Appointments;
 using Shared.Brands;
 using Shared.CategoryItem;
 using Shared.CategoryService;
+using Shared.Customers;
 using Shared.DetailOrders;
+using Shared.DetailSales;
 using Shared.Doctors;
 using Shared.Items;
+using Shared.Notes;
 using Shared.Nurses;
 using Shared.Orders;
 using Shared.Patients;
+using Shared.Sales;
 using Shared.ServiceDoctors;
 using Shared.Services;
 using Shared.Suppliers;
@@ -113,5 +118,25 @@ public class MappingProfile : Profile
         CreateMap<UnitBaseForCreationDto, UnitBase>().ReverseMap();
         CreateMap<UnitBaseForUpdateDto, UnitBase>().ReverseMap();
         CreateMap<UnitBaseForViewDto, UnitBase>().ReverseMap();
+
+        CreateMap<CustomerDto, Customer>().ReverseMap();
+        CreateMap<CustomerForCreationDto, Customer>().ReverseMap();
+        CreateMap<CustomerForUpdateDto, Customer>().ReverseMap();
+        CreateMap<CustomerForViewDto, Customer>().ReverseMap();
+
+        CreateMap<SaleDto, Sale>().ReverseMap();
+        CreateMap<SaleForCreationDto, Sale>().ReverseMap();
+        CreateMap<SaleForUpdateDto, Sale>().ReverseMap();
+        CreateMap<SaleForViewDto, Sale>().ReverseMap();
+
+        CreateMap<DetailSaleDto, DetailSale>().ReverseMap();
+        CreateMap<DetailSaleForCreationDto, DetailSale>().ReverseMap();
+        CreateMap<DetailSaleForUpdateDto, DetailSale>().ReverseMap();
+        CreateMap<DetailSaleForViewDto, DetailSale>().ReverseMap();
+
+        CreateMap<NoteDto, Note>().ReverseMap();
+        CreateMap<NoteForCreationDto, Note>().ReverseMap();
+        CreateMap<NoteForUpdateDto, Note>().ReverseMap();
+        CreateMap<NoteForViewDto, Note>().ReverseMap();
     }
 }

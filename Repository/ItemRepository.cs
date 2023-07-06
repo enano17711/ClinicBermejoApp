@@ -17,8 +17,10 @@ public class ItemRepository : RepositoryBase<Item>,
         bool trackChanges)
     {
         var items = await FindAll(trackChanges)
-            .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
-            .SortGeneric(parameters.SortColumn, parameters.SortOrder)
+            .SearchGeneric(parameters.SearchColumn,
+                parameters.SearchTerm)
+            .SortGeneric(parameters.SortColumn,
+                parameters.SortOrder)
             .Include(i => i.Brand)
             .Include(i => i.Units)
             .Include(i => i.CategoryItems)
@@ -30,19 +32,33 @@ public class ItemRepository : RepositoryBase<Item>,
     }
 
     public async Task<Item?> GetItemByIdAsync(Guid id,
-        bool trackChanges) =>
-        await FindByCondition(d => d.Id.Equals(id),
+        bool trackChanges)
+    {
+        return await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
             .Include(i => i.Brand)
             .Include(i => i.Units)
             .Include(i => i.CategoryItems)
             .SingleOrDefaultAsync();
+    }
+
+    public async Task<Item?> GetItemByAllotmentAsync(Guid id, string allotment,
+        bool trackChanges)
+    {
+        return await FindByCondition(i => i.Id.Equals(id) && i.Allotment.ToLower()
+                    .Equals(allotment.ToLower()),
+                trackChanges)
+            .SingleOrDefaultAsync();
+    }
+
 
     public void CreateItem(Item item)
     {
         Create(item);
     }
 
-    public void DeleteItem(Item item) =>
+    public void DeleteItem(Item item)
+    {
         Delete(item);
+    }
 }

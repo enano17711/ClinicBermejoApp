@@ -16,6 +16,8 @@ public abstract record ItemForManipulationDto
     [Precision(18, 2)]
     public decimal? StockItem { get; set; }
 
+    public string? Allotment { get; set; }
+
     [MaxLength(500, ErrorMessage = "La descripción no puede tener más de 500 caracteres")]
     public string? Description { get; set; }
 

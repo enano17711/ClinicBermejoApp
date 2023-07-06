@@ -78,12 +78,23 @@ public class Order
     ///     Gets or sets the supplier ID associated with the order.
     /// </summary>
     [ForeignKey(nameof(Supplier))]
-    public Guid? SupplierId { get; set; }
+    public Guid SupplierId { get; set; }
 
     /// <summary>
     ///     Gets or sets the supplier associated with the order.
     /// </summary>
     public Supplier? Supplier { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the note ID associated with the order.
+    /// </summary>
+    [ForeignKey(nameof(Note))]
+    public Guid NoteId { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the note associated with the order.
+    /// </summary>
+    public Note? Note { get; set; }
 
     /// <summary>
     ///     Gets or sets the collection of detail orders associated with the order.

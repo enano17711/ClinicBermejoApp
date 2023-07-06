@@ -16,6 +16,7 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<IDoctorRepository> _doctorRepository;
     private readonly Lazy<IItemRepository> _itemRepository;
     private readonly Lazy<IItemUnitRepository> _itemUnitRepository;
+    private readonly Lazy<INoteRepository> _noteRepository;
     private readonly Lazy<INurseRepository> _nurseRepository;
     private readonly Lazy<IOrderRepository> _orderRepository;
     private readonly Lazy<IPatientRepository> _patientRepository;
@@ -57,6 +58,7 @@ public class RepositoryManager : IRepositoryManager
         _saleRepository = new Lazy<ISaleRepository>(() => new SaleRepository(_repositoryContext));
         _detailSaleRepository = new Lazy<IDetailSaleRepository>(() => new DetailSaleRepository(_repositoryContext));
         _customerRepository = new Lazy<ICustomerRepository>(() => new CustomerRepository(_repositoryContext));
+        _noteRepository = new Lazy<INoteRepository>(() => new NoteRepository(_repositoryContext));
     }
 
     public IDoctorRepository Doctors => _doctorRepository.Value;
@@ -80,6 +82,7 @@ public class RepositoryManager : IRepositoryManager
     public ISaleRepository Sales => _saleRepository.Value;
     public IDetailSaleRepository DetailSales => _detailSaleRepository.Value;
     public ICustomerRepository Customers => _customerRepository.Value;
+    public INoteRepository Notes => _noteRepository.Value;
 
     public Task SaveAsync()
     {

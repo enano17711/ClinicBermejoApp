@@ -28,6 +28,8 @@ public interface IRepositoryManager
 
     IDetailOrderRepository DetailOrders { get; }
 
+    INoteRepository Notes { get; }
+
     // sales
     ISaleRepository Sales { get; }
     IDetailSaleRepository DetailSales { get; }

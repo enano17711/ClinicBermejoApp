@@ -40,4 +40,5 @@ public abstract record OrderForManipulationDto
 
     public string? OrderNote { get; set; }
     public Guid? SupplierId { get; set; }
+    public Guid? NoteId { get; set; }
 }

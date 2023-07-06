@@ -19,6 +19,7 @@ public class SaleRepository : RepositoryBase<Sale>,
         var sales = await FindAll(trackChanges)
             .SearchGeneric(parameters.SearchColumn, parameters.SearchTerm)
             .SortGeneric(parameters.SortColumn, parameters.SortOrder)
+            .Include(o => o.Note)
             .Include(o => o.Customer)
             .Include(o => o.DetailSales)
             .ToListAsync();
@@ -33,6 +34,7 @@ public class SaleRepository : RepositoryBase<Sale>,
     {
         return await FindByCondition(d => d.Id.Equals(id),
                 trackChanges)
+            .Include(o => o.Note)
             .Include(m => m.Customer)
             .Include(m => m.DetailSales)
             .SingleOrDefaultAsync();

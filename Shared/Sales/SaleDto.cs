@@ -1,5 +1,6 @@
 ﻿using Shared.Customers;
 using Shared.DetailSales;
+using Shared.Notes;
 
 namespace Shared.Sales;
 
@@ -15,5 +16,6 @@ public record SaleDto
     public DateTime? SaleDate { get; init; }
     public string? SaleNote { get; init; }
     public CustomerForViewDto? Customer { get; init; }
+    public NoteForViewDto? Note { get; init; }
     public ICollection<DetailSaleForViewDto>? DetailSales { get; init; }
 }

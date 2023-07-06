@@ -15,6 +15,9 @@ public class Item : BaseItem
     [Precision(18, 2)]
     public decimal? StockItem { get; set; }
 
+    public string? Allotment { get; set; }
+    public DateTime? Expiration { get; set; }
+
     [ForeignKey(nameof(Brand))] public Guid? BrandId { get; set; }
     public Brand? Brand { get; set; }
     public ICollection<CategoryItem>? CategoryItems { get; set; }

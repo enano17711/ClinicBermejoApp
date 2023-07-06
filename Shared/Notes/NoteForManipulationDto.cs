@@ -1,13 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Entities.Models.Sales;
 
-namespace Entities.Models.Orders;
+namespace Shared.Notes;
 
-public class Note
+public abstract record NoteForManipulationDto
 {
-    [Column("NoteId")] public Guid Id { get; set; }
-
     [Required(ErrorMessage = "El nombre es requerido")]
     [MaxLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres")]
     public string? Name { get; set; }
@@ -17,13 +13,4 @@ public class Note
 
     [Required(ErrorMessage = "El Tipo de Movimiento es requerido")]
     public AdjustmentType Type { get; set; }
-
-    public ICollection<Order>? Orders { get; set; }
-    public ICollection<Sale>? Sales { get; set; }
-}
-
-public enum AdjustmentType
-{
-    Positive,
-    Negative
 }

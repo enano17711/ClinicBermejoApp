@@ -11,9 +11,11 @@ public class ServiceManager : IServiceManager
     private readonly Lazy<IBrandService> _brandService;
     private readonly Lazy<ICategoryItemService> _categoryItemService;
     private readonly Lazy<ICategoryServiceService> _categoryServiceService;
+    private readonly Lazy<ICustomerService> _customerService;
     private readonly Lazy<IDetailOrderService> _detailOrderService;
     private readonly Lazy<IDoctorService> _doctorService;
     private readonly Lazy<IItemService> _itemService;
+    private readonly Lazy<INoteService> _noteService;
     private readonly Lazy<INurseService> _nurseService;
     private readonly Lazy<IOrderService> _orderService;
     private readonly Lazy<IPatientService> _patientService;
@@ -46,6 +48,8 @@ public class ServiceManager : IServiceManager
             new Lazy<ICategoryItemService>(() => new CategoryItemService(repository, mapper, logger));
         _itemService = new Lazy<IItemService>(() => new ItemService(repository, mapper, logger));
         _unitBaseService = new Lazy<IUnitBaseBaseService>(() => new UnitBaseService(repository, mapper, logger));
+        _noteService = new Lazy<INoteService>(() => new NoteService(repository, mapper, logger));
+        _customerService = new Lazy<ICustomerService>(() => new CustomerService(repository, mapper, logger));
     }
 
     public IDoctorService DoctorService => _doctorService.Value;
@@ -64,4 +68,6 @@ public class ServiceManager : IServiceManager
     public ICategoryItemService CategoryItemService => _categoryItemService.Value;
     public IItemService ItemService => _itemService.Value;
     public IUnitBaseBaseService UnitBaseService => _unitBaseService.Value;
+    public INoteService NoteService => _noteService.Value;
+    public ICustomerService CustomerService => _customerService.Value;
 }
